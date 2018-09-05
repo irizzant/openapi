@@ -154,11 +154,13 @@
           }
         }, {
           "in" : "query",
-          "name" : "bookingType",
-          "description" : "Order type",
+          "name" : "pickingReference",
           "schema" : {
-            "enum" : [ "INI", "REP", "END" ]
-          }
+            "type" : "string"
+          },
+          "example" : "abc",
+          "description" : "Your internal order reference. Must be unique.",
+          "required" : true
         } ],
         "responses" : {
           "2XX" : {
