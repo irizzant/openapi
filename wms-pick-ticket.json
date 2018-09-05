@@ -470,7 +470,7 @@
             "type" : "string",
             "example" : "",
             "enum" : [ "", "N", "B" ],
-            "description" : "Code to identify the available operations on the created order.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n"
+            "description" : "Code to identify the available operations on the created order.\nWill be provided during the integration.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n"
           },
           "custom_properties" : {
             "type" : "object",
@@ -495,7 +495,7 @@
             } ]
           }
         },
-        "required" : [ "warehouse", "picking_reference", "baby_invoice_number", "ship_to", "pick_ticket_body" ]
+        "required" : [ "warehouse", "picking_reference", "ship_to", "pick_ticket_body" ]
       },
       "PickTicketHeaderEdi" : {
         "allOf" : [ {
