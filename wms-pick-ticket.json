@@ -213,8 +213,15 @@
         "required" : true,
         "description" : "HMAC MD5 of the query string.\nThis param MUST NOT be included in HMAC calculation\n",
         "schema" : {
-          "type" : "string",
-          "format" : "string"
+          "type" : "string"
+        }
+      },
+      "orderReferencePrefix" : {
+        "in" : "query",
+        "name" : "orderReferencePrefix",
+        "description" : "Prefix to prepend to the order reference",
+        "schema" : {
+          "type" : "string"
         }
       }
     },
