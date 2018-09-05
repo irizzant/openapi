@@ -51,12 +51,7 @@
             }
           }
         }, {
-          "name" : "orderReferencePrefix",
-          "in" : "query",
-          "description" : "Prefix to prepend to the order reference",
-          "schema" : {
-            "type" : "string"
-          }
+          "$ref" : "#/components/parameters/orderReferencePrefix"
         }, {
           "in" : "query",
           "name" : "bookingType",
@@ -146,12 +141,7 @@
           "description" : "Code to identify the warehouse internally.\nWill be provided during the integration\n",
           "required" : true
         }, {
-          "name" : "orderReferencePrefix",
-          "in" : "query",
-          "description" : "Prefix to prepend to the order reference",
-          "schema" : {
-            "type" : "string"
-          }
+          "$ref" : "#/components/parameters/orderReferencePrefix"
         }, {
           "in" : "query",
           "name" : "pickingReference",
