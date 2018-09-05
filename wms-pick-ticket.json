@@ -132,6 +132,8 @@
         }, {
           "$ref" : "#/components/parameters/HMAC_PARAM"
         }, {
+          "$ref" : "#/components/parameters/orderReferencePrefix"
+        }, {
           "in" : "query",
           "name" : "warehouseId",
           "schema" : {
@@ -141,8 +143,6 @@
           "description" : "Code to identify the warehouse internally.\nWill be provided during the integration\n",
           "required" : true
         }, {
-          "$ref" : "#/components/parameters/orderReferencePrefix"
-        }, {
           "in" : "query",
           "name" : "pickingReference",
           "schema" : {
@@ -151,6 +151,23 @@
           "example" : "abc",
           "description" : "Your internal order reference. Must be unique.",
           "required" : true
+        }, {
+          "in" : "query",
+          "name" : "serviceInvoiceNumber",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "abc",
+          "description" : "Invoice number. \nRequired if you DON'T specify the \"pickingReference\" query parameter.\n"
+        }, {
+          "in" : "query",
+          "name" : "serviceInvoiceDate",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "example" : "2018-08-23",
+          "description" : "Order date. \nRequired if \"baby_invoice_date\" was passed when creating\nthe order\n"
         } ],
         "responses" : {
           "2XX" : {
