@@ -167,7 +167,7 @@
             "format" : "date"
           },
           "example" : "2018-08-23",
-          "description" : "Order date. \nRequired if \"baby_invoice_date\" was passed when creating\nthe order\n"
+          "description" : "Invoice date / Pick ticket date.\nRequired if \"baby_invoice_date\" was passed with PUT method\n"
         } ],
         "responses" : {
           "2XX" : {
@@ -380,12 +380,12 @@
             "type" : "string",
             "format" : "date",
             "example" : "2015-05-14",
-            "description" : "Invoice date / Pick ticket date"
+            "description" : "Invoice date / Pick ticket date\n"
           },
           "baby_invoice_number" : {
             "type" : "string",
             "example" : "abc",
-            "description" : "Invoice number\n"
+            "description" : "Invoice number.\nRequired if you DON'T specify a \"picking_reference\"\n"
           },
           "start_ship_date" : {
             "type" : "string",
