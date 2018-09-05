@@ -473,9 +473,12 @@
             "description" : "Code to identify the available operations on the created order.\nWill be provided during the integration.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n"
           },
           "custom_properties" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "string"
+              }
             }
           },
           "ship_to" : {
