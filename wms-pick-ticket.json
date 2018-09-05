@@ -374,7 +374,7 @@
           "picking_reference" : {
             "type" : "string",
             "example" : "abc",
-            "description" : "Your internal order reference. Must be unique."
+            "description" : "Your internal order reference. Must be unique.\n"
           },
           "baby_invoice_date" : {
             "type" : "string",
