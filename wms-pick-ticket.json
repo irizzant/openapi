@@ -83,6 +83,11 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PickTicketServiceResponse"
+                },
+                "examples" : {
+                  "PickTicketServiceResponse" : {
+                    "$ref" : "#/components/examples/PickTicketServiceResponse"
+                  }
                 }
               }
             }
@@ -891,10 +896,7 @@
             "type" : "string"
           }
         },
-        "required" : [ "message" ],
-        "example" : {
-          "message" : "Order created successfully"
-        }
+        "required" : [ "message" ]
       }
     },
     "examples" : {
@@ -1088,6 +1090,12 @@
               }
             }
           } ]
+        }
+      },
+      "PickTicketServiceResponse" : {
+        "value" : {
+          "message" : "Operation successfully completed",
+          "statusCode" : 200
         }
       },
       "ServerError" : {
