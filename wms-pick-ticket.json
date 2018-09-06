@@ -5,10 +5,10 @@
     "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-pick-tickets/1.0.0"
   }, {
     "description" : "Production",
-    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/"
+    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/pickTicketsService"
   }, {
     "description" : "Test/Stage",
-    "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/"
+    "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/pickTicketsService"
   } ],
   "info" : {
     "description" : "API to create/modify orders in WMS",
@@ -21,14 +21,11 @@
   "tags" : [ {
     "name" : "Pick ticket",
     "description" : "Pick Tickets / Orders"
-  }, {
-    "name" : "WMS",
-    "description" : "Warehouse Management System"
   } ],
   "paths" : {
-    "/pickTicketsService/lockUpdate" : {
+    "/lockUpdate" : {
       "put" : {
-        "tags" : [ "WMS", "Pick ticket" ],
+        "tags" : [ "Pick ticket" ],
         "summary" : "Change the lock type on pick ticket / order",
         "operationId" : "lockUpdate",
         "description" : "API to change the lock type on a pick ticket / order\n",
@@ -41,31 +38,11 @@
         }, {
           "$ref" : "#/components/parameters/warehouseId"
         }, {
-          "in" : "query",
-          "name" : "pickingReference",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "abc",
-          "description" : "Your internal order reference. Must be unique.",
-          "required" : true
+          "$ref" : "#/components/parameters/pickingReference"
         }, {
-          "in" : "query",
-          "name" : "babyInvoiceNumber",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "abc",
-          "description" : "Invoice number. \nRequired if you DON'T specify the \"pickingReference\" query parameter.\n"
+          "$ref" : "#/components/parameters/babyInvoiceDate"
         }, {
-          "in" : "query",
-          "name" : "babyInvoiceDate",
-          "schema" : {
-            "type" : "string",
-            "format" : "date"
-          },
-          "example" : "2018-08-23",
-          "description" : "Invoice date / Pick ticket date.\nRequired if \"baby_invoice_date\" was passed with PUT method\n"
+          "$ref" : "#/components/parameters/babyInvoiceNumber"
         }, {
           "in" : "query",
           "name" : "lockType",
@@ -113,9 +90,9 @@
         }
       }
     },
-    "/pickTicketsService/pickTicket" : {
+    "/pickTicket" : {
       "put" : {
-        "tags" : [ "WMS", "Pick ticket" ],
+        "tags" : [ "Pick ticket" ],
         "summary" : "Create/Modify an order in WMS",
         "operationId" : "createOrder",
         "description" : "API to create or modify an order in WMS\n",
@@ -218,7 +195,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "WMS", "Pick ticket" ],
+        "tags" : [ "Pick ticket" ],
         "summary" : "Cancel completely an order in WMS",
         "operationId" : "cancelOrder",
         "description" : "API to cancel completely an order in WMS\n",
@@ -233,22 +210,9 @@
         }, {
           "$ref" : "#/components/parameters/pickingReference"
         }, {
-          "in" : "query",
-          "name" : "babyInvoiceNumber",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "abc",
-          "description" : "Invoice number. \nRequired if you DON'T specify the \"pickingReference\" query parameter.\n"
+          "$ref" : "#/components/parameters/babyInvoiceDate"
         }, {
-          "in" : "query",
-          "name" : "babyInvoiceDate",
-          "schema" : {
-            "type" : "string",
-            "format" : "date"
-          },
-          "example" : "2018-08-23",
-          "description" : "Invoice date / Pick ticket date.\nRequired if \"baby_invoice_date\" was passed with PUT method\n"
+          "$ref" : "#/components/parameters/babyInvoiceNumber"
         } ],
         "responses" : {
           "2XX" : {
@@ -304,7 +268,7 @@
         "in" : "header",
         "name" : "HMAC_PARAM",
         "required" : true,
-        "description" : "HMAC MD5 of the query string.\nThis param MUST NOT be included in HMAC calculation\n",
+        "description" : "HMAC MD5 of the query string. This param MUST NOT be included in HMAC calculation. The private key to calculate the HMAC digest will be provided during the integration.\n",
         "schema" : {
           "type" : "string"
         }
@@ -335,6 +299,25 @@
         "example" : "abc",
         "description" : "Your internal order reference. Must be unique.",
         "required" : true
+      },
+      "babyInvoiceNumber" : {
+        "in" : "query",
+        "name" : "babyInvoiceNumber",
+        "schema" : {
+          "type" : "string"
+        },
+        "example" : "abc",
+        "description" : "Invoice number. \nRequired if you DON'T specify the \"pickingReference\" query parameter.\n"
+      },
+      "babyInvoiceDate" : {
+        "in" : "query",
+        "name" : "babyInvoiceDate",
+        "schema" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "example" : "2018-08-23",
+        "description" : "Invoice date / Pick ticket date.\nRequired if \"baby_invoice_date\" was passed during \norder creation\n"
       }
     },
     "schemas" : {
@@ -373,7 +356,6 @@
             "total_pieces" : "557",
             "total_boxes" : "10",
             "priority" : "A",
-            "pick_type" : "TO-SHIP",
             "shipping_via" : "EXECUTIVE GROUP INTERNATIONAL",
             "invoice_amount" : "7414,55",
             "discount_amount" : "200,00",
@@ -681,7 +663,7 @@
                 "example" : "123456"
               }
             },
-            "required" : [ "sku" ]
+            "required" : [ "barcode_sku" ]
           }, {
             "type" : "object",
             "properties" : {
@@ -923,7 +905,6 @@
             "total_pieces" : "557",
             "total_boxes" : "10",
             "priority" : "A",
-            "pick_type" : "TO-SHIP",
             "shipping_via" : "EXECUTIVE GROUP INTERNATIONAL",
             "invoice_amount" : "7414,55",
             "discount_amount" : "200,00",
@@ -1020,7 +1001,6 @@
             "total_pieces" : 557,
             "total_boxes" : 10,
             "priority" : "A",
-            "pick_type" : "TO-SHIP",
             "shipping_via" : "EXECUTIVE GROUP INTERNATIONAL",
             "invoice_amount" : "7414,55",
             "discount_amount" : "200,00",
