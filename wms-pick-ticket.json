@@ -231,14 +231,7 @@
         }, {
           "$ref" : "#/components/parameters/warehouseId"
         }, {
-          "in" : "query",
-          "name" : "pickingReference",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "abc",
-          "description" : "Your internal order reference. Must be unique.",
-          "required" : true
+          "$ref" : "#/components/parameters/pickingReference"
         }, {
           "in" : "query",
           "name" : "babyInvoiceNumber",
@@ -331,6 +324,16 @@
         "schema" : {
           "type" : "integer"
         },
+        "required" : true
+      },
+      "pickingReference" : {
+        "in" : "query",
+        "name" : "pickingReference",
+        "schema" : {
+          "type" : "string"
+        },
+        "example" : "abc",
+        "description" : "Your internal order reference. Must be unique.",
         "required" : true
       }
     },
