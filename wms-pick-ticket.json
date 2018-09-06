@@ -188,6 +188,11 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PickTicketServiceResponse"
+                },
+                "examples" : {
+                  "PickTicketServiceResponse" : {
+                    "$ref" : "#/components/examples/PickTicketServiceResponse"
+                  }
                 }
               }
             }
@@ -266,6 +271,11 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PickTicketServiceResponse"
+                },
+                "examples" : {
+                  "PickTicketServiceResponse" : {
+                    "$ref" : "#/components/examples/PickTicketServiceResponse"
+                  }
                 }
               }
             }
