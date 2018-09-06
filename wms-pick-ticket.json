@@ -26,6 +26,88 @@
     "description" : "Warehouse Management System"
   } ],
   "paths" : {
+    "/pickTicketsService/lockUpdate" : {
+      "put" : {
+        "tags" : [ "WMS", "Pick ticket" ],
+        "summary" : "Change the lock type on pick ticket / order",
+        "operationId" : "lockUpdate",
+        "description" : "API to change the lock type on a pick ticket / order\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/TIMESTAMP_PARAM"
+        }, {
+          "$ref" : "#/components/parameters/HMAC_PARAM"
+        }, {
+          "$ref" : "#/components/parameters/orderReferencePrefix"
+        }, {
+          "$ref" : "#/components/parameters/warehouseId"
+        }, {
+          "in" : "query",
+          "name" : "pickingReference",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "abc",
+          "description" : "Your internal order reference. Must be unique.",
+          "required" : true
+        }, {
+          "in" : "query",
+          "name" : "babyInvoiceNumber",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "abc",
+          "description" : "Invoice number. \nRequired if you DON'T specify the \"pickingReference\" query parameter.\n"
+        }, {
+          "in" : "query",
+          "name" : "babyInvoiceDate",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "example" : "2018-08-23",
+          "description" : "Invoice date / Pick ticket date.\nRequired if \"baby_invoice_date\" was passed with PUT method\n"
+        }, {
+          "in" : "query",
+          "name" : "lockType",
+          "description" : "Code to identify the available operations on the created order.\nWill be provided during the integration.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "", "N", "B" ]
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "2XX" : {
+            "description" : "Successfully completed operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PickTicketServiceResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/InternalServerError"
+                },
+                "examples" : {
+                  "serverError" : {
+                    "$ref" : "#/components/examples/ServerError"
+                  },
+                  "badParameter" : {
+                    "$ref" : "#/components/examples/BadParameter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/pickTicketsService/pickTicket" : {
       "put" : {
         "tags" : [ "WMS", "Pick ticket" ],
@@ -233,6 +315,15 @@
         "schema" : {
           "type" : "string"
         }
+      },
+      "warehouseId" : {
+        "in" : "query",
+        "name" : "warehouseId",
+        "description" : "Code to identify the warehouse internally.\nWill be provided during the integration\n",
+        "schema" : {
+          "type" : "integer"
+        },
+        "required" : true
       }
     },
     "schemas" : {
