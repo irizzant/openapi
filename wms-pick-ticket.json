@@ -229,14 +229,7 @@
         }, {
           "$ref" : "#/components/parameters/orderReferencePrefix"
         }, {
-          "in" : "query",
-          "name" : "warehouseId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "example" : 30,
-          "description" : "Code to identify the warehouse internally.\nWill be provided during the integration\n",
-          "required" : true
+          "$ref" : "#/components/parameters/warehouseId"
         }, {
           "in" : "query",
           "name" : "pickingReference",
