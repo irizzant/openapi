@@ -153,7 +153,7 @@
           "required" : true
         }, {
           "in" : "query",
-          "name" : "serviceInvoiceNumber",
+          "name" : "babyInvoiceNumber",
           "schema" : {
             "type" : "string"
           },
@@ -161,7 +161,7 @@
           "description" : "Invoice number. \nRequired if you DON'T specify the \"pickingReference\" query parameter.\n"
         }, {
           "in" : "query",
-          "name" : "serviceInvoiceDate",
+          "name" : "babyInvoiceDate",
           "schema" : {
             "type" : "string",
             "format" : "date"
@@ -575,7 +575,8 @@
                 "description" : "SKU\n",
                 "example" : "123456"
               }
-            }
+            },
+            "required" : [ "sku" ]
           }, {
             "type" : "object",
             "properties" : {
