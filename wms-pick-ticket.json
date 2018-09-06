@@ -1094,8 +1094,7 @@
       },
       "PickTicketServiceResponse" : {
         "value" : {
-          "message" : "Operation successfully completed",
-          "statusCode" : 200
+          "message" : "Operation successfully completed"
         }
       },
       "ServerError" : {
