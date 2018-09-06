@@ -418,21 +418,12 @@
           "total_boxes" : {
             "type" : "integer",
             "example" : 10,
-            "description" : "Number of boxes"
+            "description" : "Number of boxes.\nWill be only used as an additional note\n"
           },
           "priority" : {
             "type" : "integer",
             "example" : "A",
             "description" : "Order priority"
-          },
-          "pick_type" : {
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/OrderTypeEnum"
-            }, {
-              "type" : "string",
-              "example" : "TO-SHIP"
-            } ],
-            "description" : "Order type.\nMutually exclusive with header parameter orderType\n"
           },
           "shipping_via" : {
             "type" : "string",
@@ -776,6 +767,12 @@
             "type" : "string",
             "description" : "ZIP\n",
             "example" : "90011"
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "description" : "email\n",
+            "example" : "a@b.com"
           }
         },
         "required" : [ "client_code", "name", "address", "city", "country", "state", "zip" ]
