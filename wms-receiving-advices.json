@@ -38,8 +38,7 @@
           "name" : "orderType",
           "description" : "Order type. Will be provided during the integration",
           "schema" : {
-            "type" : "string",
-            "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
+            "$ref" : "#/components/schemas/OrderTypeEnum"
           }
         } ],
         "requestBody" : {
@@ -295,9 +294,73 @@
           }
         },
         "required" : [ "receiving_advice_header" ],
-        "example" : [ {
-          "$ref" : "#/components/examples/ReceiptAdvicePieces"
-        } ]
+        "example" : {
+          "receiving_advice_header" : {
+            "Company" : "woman",
+            "warehouse" : "FDSNJ",
+            "receiving_reference" : "",
+            "ra_number" : [ "RA123", "abc" ],
+            "master_invoice_date" : "2015-05-14",
+            "master_invoice_number" : 9.0,
+            "delivery_terms" : "",
+            "payment_terms" : "B07",
+            "currency" : "EURO",
+            "total_amount" : "11509.97",
+            "total_hanging_pieces" : "",
+            "total_pieces" : "880",
+            "total_boxes" : "21",
+            "client_code" : "033505",
+            "contact_phone" : 8.331860058E9,
+            "name" : "PAOLO ROSSI",
+            "address" : "VIA BIANCHI,6",
+            "city" : "FI",
+            "country" : "FIRENZE",
+            "state" : "",
+            "zip" : "235689",
+            "custom_properties" : {
+              "custom_property" : [ {
+                "name" : "CustomField1",
+                "value" : "CustomValue1"
+              }, {
+                "name" : "CustomField2",
+                "value" : "CustomValue2"
+              } ]
+            },
+            "receiving_advice_body" : {
+              "boxes" : {
+                "carton" : [ {
+                  "carton_type" : "PP",
+                  "carton_number" : "APC050299",
+                  "total_qty" : "23",
+                  "skus" : {
+                    "sku" : [ {
+                      "model" : "IMBAL.C1",
+                      "style" : "",
+                      "color" : "",
+                      "size" : "UNI",
+                      "barcode_sku" : "123456",
+                      "barcode_ean" : "3000036057013",
+                      "barcode_upc" : "",
+                      "qty" : "1",
+                      "nrf_color" : "",
+                      "nrf_size" : "",
+                      "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
+                      "wholesale_price" : "",
+                      "material_composition" : "",
+                      "pieces" : {
+                        "piece" : [ {
+                          "external_barcode" : "P0300000000001"
+                        }, {
+                          "external_barcode" : "P0300000000005"
+                        } ]
+                      }
+                    } ]
+                  }
+                } ]
+              }
+            }
+          }
+        }
       },
       "ReceiptAdviceBody" : {
         "oneOf" : [ {
