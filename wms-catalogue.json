@@ -247,7 +247,7 @@
             },
             "commodity_category" : {
               "type" : "string",
-              "description" : "Commodity category. Will be provided during integration\n",
+              "description" : "Commodity category.\n- \"O\": Others\n- \"A\": Accessories\n- \"S\": Shoes\n- \"B\": Handbags and Bags\n- \"F\": Flat Garments\n- \"H\": Hanging Garments\n",
               "example" : "H"
             },
             "commodity_sub_category" : {
@@ -256,7 +256,7 @@
               "example" : "ABC"
             }
           },
-          "required" : [ "english_description", "commodity_category", "commodity_sub_category" ]
+          "required" : [ "english_description", "commodity_category" ]
         } ]
       },
       "BarcodeSkuUpcEan" : {
