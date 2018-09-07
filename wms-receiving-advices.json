@@ -5,10 +5,10 @@
     "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-receiving-advices/1.0.0"
   }, {
     "description" : "Production",
-    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/receivingAdviceService"
+    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/receivingAdviceService/1.0.0"
   }, {
     "description" : "Test/Stage",
-    "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/"
+    "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/receivingAdviceService/1.0.0"
   } ],
   "info" : {
     "description" : "API to create/modify receiving advices and returns in WMS",
