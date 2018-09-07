@@ -4,9 +4,6 @@
     "description" : "SwaggerHub API Auto Mocking",
     "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-receiving-advices/1.0.0"
   }, {
-    "description" : "SwaggerHub API Auto Mocking",
-    "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-pick-tickets/1.0.0"
-  }, {
     "description" : "Production",
     "url" : "https://webapps.sdb.it/webtng/wsrest/wms/"
   }, {
@@ -14,7 +11,7 @@
     "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/"
   } ],
   "info" : {
-    "description" : "API to create/modify receiving advices in WMS",
+    "description" : "API to create/modify receiving advices and returns in WMS",
     "version" : "1.0.0",
     "title" : "Receiving advices",
     "contact" : {
@@ -29,7 +26,7 @@
     "/receivingAdvice" : {
       "put" : {
         "tags" : [ "Receiving advice" ],
-        "summary" : "Create/Modify a receiving advice in WMS",
+        "summary" : "Create/Modify a receiving advice or a return in WMS",
         "operationId" : "createOrder",
         "description" : "API to create or modify a receiving advice in WMS\n",
         "parameters" : [ {
@@ -39,28 +36,10 @@
         }, {
           "in" : "query",
           "name" : "orderType",
-          "description" : "Order type",
+          "description" : "Order type. Will be provided during the integration",
           "schema" : {
-            "$ref" : "#/components/schemas/OrderTypeEnum"
-          }
-        }, {
-          "in" : "query",
-          "name" : "skuToDiscard",
-          "description" : "A list of SKU's which will be ignored",
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }, {
-          "$ref" : "#/components/parameters/orderReferencePrefix"
-        }, {
-          "in" : "query",
-          "name" : "bookingType",
-          "description" : "Order type",
-          "schema" : {
-            "enum" : [ "INI", "REP", "END" ]
+            "type" : "string",
+            "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
           }
         } ],
         "requestBody" : {
@@ -68,14 +47,14 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/PickTicket"
+                "$ref" : "#/components/schemas/ReceivingAdvice"
               },
               "examples" : {
-                "PickTicketBoxes" : {
-                  "$ref" : "#/components/examples/PickTicketBoxes"
+                "ReceivingAdviceBoxes" : {
+                  "$ref" : "#/components/examples/ReceivingAdviceBoxes"
                 },
-                "PickTicketPieces" : {
-                  "$ref" : "#/components/examples/PickTicketPieces"
+                "ReceivingAdvicePieces" : {
+                  "$ref" : "#/components/examples/ReceivingAdvicePieces"
                 }
               }
             },
@@ -94,84 +73,6 @@
             }
           }
         },
-        "responses" : {
-          "2XX" : {
-            "description" : "Successfully completed operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PickTicketServiceResponse"
-                }
-              }
-            }
-          },
-          "default" : {
-            "description" : "Internal server error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/InternalServerError"
-                },
-                "examples" : {
-                  "serverError" : {
-                    "$ref" : "#/components/examples/ServerError"
-                  },
-                  "badParameter" : {
-                    "$ref" : "#/components/examples/BadParameter"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "WMS", "Pick ticket" ],
-        "summary" : "Cancel completely an order in WMS",
-        "operationId" : "cancelOrder",
-        "description" : "API to cancel completely an order in WMS\n",
-        "parameters" : [ {
-          "$ref" : "#/components/parameters/TIMESTAMP_PARAM"
-        }, {
-          "$ref" : "#/components/parameters/HMAC_PARAM"
-        }, {
-          "$ref" : "#/components/parameters/orderReferencePrefix"
-        }, {
-          "in" : "query",
-          "name" : "warehouseId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "example" : 30,
-          "description" : "Code to identify the warehouse internally.\nWill be provided during the integration\n",
-          "required" : true
-        }, {
-          "in" : "query",
-          "name" : "pickingReference",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "abc",
-          "description" : "Your internal order reference. Must be unique.",
-          "required" : true
-        }, {
-          "in" : "query",
-          "name" : "serviceInvoiceNumber",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "abc",
-          "description" : "Invoice number. \nRequired if you DON'T specify the \"pickingReference\" query parameter.\n"
-        }, {
-          "in" : "query",
-          "name" : "serviceInvoiceDate",
-          "schema" : {
-            "type" : "string",
-            "format" : "date"
-          },
-          "example" : "2018-08-23",
-          "description" : "Invoice date / Pick ticket date.\nRequired if \"baby_invoice_date\" was passed with PUT method\n"
-        } ],
         "responses" : {
           "2XX" : {
             "description" : "Successfully completed operation",
@@ -240,116 +141,148 @@
         "type" : "string",
         "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
       },
-      "PickTicket" : {
+      "ReceivingAdvice" : {
         "type" : "object",
         "properties" : {
-          "pick_ticket_header" : {
+          "receiving_advice_header" : {
             "type" : "array",
             "items" : {
-              "oneOf" : [ {
-                "$ref" : "#/components/schemas/PickTicketHeader"
+              "type" : "object",
+              "allOf" : [ {
+                "oneOf" : [ {
+                  "type" : "object",
+                  "properties" : {
+                    "receiving_reference" : {
+                      "type" : "string",
+                      "example" : "abcdef",
+                      "description" : "Unique reference for the receiving advice\n"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "properties" : {
+                    "master_invoice_number" : {
+                      "type" : "string",
+                      "description" : "Master Invoice Number\n",
+                      "example" : "005-3324"
+                    }
+                  }
+                } ]
               }, {
-                "$ref" : "#/components/schemas/PickTicketHeaderEdi"
+                "type" : "object",
+                "properties" : {
+                  "Company" : {
+                    "type" : "string",
+                    "deprecated" : true
+                  },
+                  "warehouse" : {
+                    "type" : "integer",
+                    "example" : 30,
+                    "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
+                  },
+                  "ra_number" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string"
+                    },
+                    "example" : "RA123",
+                    "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
+                  },
+                  "master_invoice_date" : {
+                    "type" : "string",
+                    "format" : "date",
+                    "description" : "Master Inovice Date\n",
+                    "example" : "2018-03-15"
+                  },
+                  "delivery_terms" : {
+                    "type" : "string",
+                    "description" : "Delivery terms.\nWill be only used as an additional note\n"
+                  },
+                  "payment_terms" : {
+                    "type" : "string",
+                    "description" : "Payment terms.\nWill be only used as an additional note\n"
+                  },
+                  "currency" : {
+                    "type" : "string",
+                    "description" : "Currency.\nWill be only used as an additional note\n"
+                  },
+                  "total_amount" : {
+                    "type" : "integer",
+                    "example" : 123.0,
+                    "description" : "Total amount. 2 decimal places.\n"
+                  },
+                  "total_hanging_pieces" : {
+                    "type" : "integer",
+                    "example" : 23,
+                    "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
+                  },
+                  "total_pieces" : {
+                    "type" : "integer",
+                    "example" : 557,
+                    "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
+                  },
+                  "total_boxes" : {
+                    "type" : "integer",
+                    "example" : 10,
+                    "description" : "Number of boxes.\nWill be only used as an additional note\n"
+                  },
+                  "client_code" : {
+                    "type" : "string",
+                    "example" : "12345",
+                    "description" : "Consignee code.\n"
+                  },
+                  "contact_phone" : {
+                    "type" : "string",
+                    "example" : "01-7788-7899",
+                    "description" : "Contact phone.\nWill be only used as an additional note\n"
+                  },
+                  "name" : {
+                    "type" : "string",
+                    "example" : "PAOLO ROSSI",
+                    "description" : "Consignee name.\n"
+                  },
+                  "address" : {
+                    "type" : "string",
+                    "example" : "VIA BIANCHI, 6",
+                    "description" : "Consignee address.\n"
+                  },
+                  "city" : {
+                    "type" : "string",
+                    "example" : "FI",
+                    "description" : "Consignee city.\n"
+                  },
+                  "country" : {
+                    "type" : "string",
+                    "example" : "IT",
+                    "description" : "Consignee country ISO code.\n"
+                  },
+                  "state" : {
+                    "type" : "string",
+                    "example" : "USCA",
+                    "description" : "Consignee state ISO code. Hyphen not supported\n"
+                  },
+                  "zip" : {
+                    "type" : "string",
+                    "example" : "123456",
+                    "description" : "Consignee ZIP\n"
+                  },
+                  "custom_properties" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "description" : "Dictionary of additional properties\n",
+                      "additionalProperties" : {
+                        "type" : "string"
+                      }
+                    }
+                  }
+                },
+                "required" : [ "warehouse", "receiving_reference", "receipt_advice_body" ]
               } ]
             }
           }
         },
-        "required" : [ "pick_ticket_header" ],
-        "example" : {
-          "pickticket_header" : [ {
-            "company" : "woman",
-            "warehouse" : "FDSNJ",
-            "pon" : "1234567890",
-            "po_date" : "2015-05-14",
-            "picking_reference" : "150007925",
-            "baby_invoice_date" : "2015-05-14",
-            "baby_invoice_number" : 9313,
-            "start_ship_date" : "2015-05-14",
-            "cancel_date" : "2015-05-20",
-            "requested_ship_date" : "2015-05-14",
-            "total_hanging_pieces" : "23",
-            "total_pieces" : "557",
-            "total_boxes" : "10",
-            "priority" : "A",
-            "pick_type" : "TO-SHIP",
-            "shipping_via" : "EXECUTIVE GROUP INTERNATIONAL",
-            "invoice_amount" : "7414,55",
-            "discount_amount" : "200,00",
-            "discount_percent" : "16,67",
-            "owner_reference" : "123456",
-            "dc_code" : "123",
-            "department" : "INTIMATE",
-            "terms_type" : "05",
-            "terms_net_days" : "30",
-            "channel" : "ABC",
-            "custom_properties" : {
-              "custom_property" : [ {
-                "name" : "CustomField1",
-                "value" : "CustomValue1"
-              }, {
-                "name" : "CustomField2",
-                "value" : "CustomValue2"
-              } ]
-            },
-            "ship_to" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 428",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "sold_to" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 479",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "store" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 428",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "pickticket_body" : {
-              "pieces" : {
-                "sku" : [ {
-                  "model" : "IMBAL.C1",
-                  "style" : "",
-                  "color" : "",
-                  "size" : "UNI",
-                  "barcode_sku" : "123456",
-                  "barcode_ean" : "3000036057013",
-                  "barcode_upc" : "",
-                  "qty" : 1,
-                  "nrf_color" : "",
-                  "nrf_size" : "",
-                  "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
-                  "wholesale_price" : "",
-                  "discount_amount" : "50,00",
-                  "discount_percent" : "16,67",
-                  "price_type" : "MARKDOWN",
-                  "material_composition" : "",
-                  "order_line" : [ {
-                    "primary_reference" : "abc",
-                    "secondary_reference" : "456",
-                    "quantity" : "3"
-                  } ]
-                } ]
-              }
-            }
-          } ]
-        }
+        "required" : [ "receiving_advice_header" ]
       },
       "PickTicketHeader" : {
         "type" : "object",
