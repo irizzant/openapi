@@ -254,9 +254,18 @@
                     "type" : "array",
                     "items" : {
                       "type" : "object",
-                      "description" : "Dictionary of additional properties\n",
-                      "additionalProperties" : {
-                        "type" : "string"
+                      "description" : "Additional properties\n",
+                      "properties" : {
+                        "name" : {
+                          "type" : "string",
+                          "description" : "Name of the property\n",
+                          "example" : "Property"
+                        },
+                        "value" : {
+                          "type" : "string",
+                          "description" : "Value of the property\n",
+                          "example" : "Value"
+                        }
                       }
                     }
                   },
