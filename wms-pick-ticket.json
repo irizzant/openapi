@@ -103,8 +103,10 @@
         }, {
           "in" : "query",
           "name" : "orderType",
+          "description" : "Order type. Will be provided during the integration",
           "schema" : {
-            "$ref" : "#/components/schemas/OrderTypeEnum"
+            "type" : "string",
+            "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
           }
         }, {
           "in" : "query",
@@ -320,11 +322,6 @@
       }
     },
     "schemas" : {
-      "OrderTypeEnum" : {
-        "type" : "string",
-        "description" : "Order type. Will be provided during the integration",
-        "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
-      },
       "PickTicket" : {
         "type" : "object",
         "properties" : {
