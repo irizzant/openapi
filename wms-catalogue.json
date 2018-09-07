@@ -247,13 +247,15 @@
             },
             "commodity_category" : {
               "type" : "string",
-              "description" : "Commodity category\n",
-              "example" : "H"
+              "description" : "Commodity category. Will be provided during integration\n",
+              "example" : "H",
+              "required" : true
             },
             "commodity_sub_category" : {
               "type" : "string",
-              "description" : "Commodity sub category\n",
-              "example" : "ABC"
+              "description" : "Commodity sub category. Will be provided during integration\n",
+              "example" : "ABC",
+              "required" : true
             }
           },
           "required" : [ "english_description" ]
