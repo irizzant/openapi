@@ -87,6 +87,11 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/CatalogServiceResponse"
+                },
+                "examples" : {
+                  "CatalogServiceResponse" : {
+                    "$ref" : "#/components/schemas/CatalogServiceResponse"
+                  }
                 }
               }
             }
@@ -414,10 +419,7 @@
             }
           }
         },
-        "required" : [ "message" ],
-        "example" : {
-          "message" : "Receipt advice created successfully"
-        }
+        "required" : [ "message" ]
       },
       "NotCompliantArticleEntry" : {
         "type" : "object",
@@ -478,6 +480,11 @@
               "selection_code_description" : "FEMALE"
             } ]
           }
+        }
+      },
+      "CatalogServiceResponse" : {
+        "value" : {
+          "message" : "Catalogue imported successfully"
         }
       },
       "ServerError" : {
