@@ -5,10 +5,10 @@
     "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-pick-tickets/1.0.0"
   }, {
     "description" : "Production",
-    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/pickTicketsService"
+    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/pickTicketsService/1.0.0"
   }, {
     "description" : "Test/Stage",
-    "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/pickTicketsService"
+    "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/pickTicketsService/1.0.0"
   } ],
   "info" : {
     "description" : "API to create/modify orders in WMS",
