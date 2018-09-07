@@ -206,7 +206,8 @@
                     "description" : "Currency.\nWill be only used as an additional note\n"
                   },
                   "total_amount" : {
-                    "type" : "integer",
+                    "type" : "number",
+                    "format" : "double",
                     "example" : 123.0,
                     "description" : "Total amount. 2 decimal places.\n"
                   },
@@ -381,9 +382,11 @@
                   "$ref" : "#/components/schemas/Carton"
                 }
               }
-            }
+            },
+            "required" : [ "carton" ]
           }
-        }
+        },
+        "required" : [ "boxes" ]
       },
       "Carton" : {
         "type" : "object",
