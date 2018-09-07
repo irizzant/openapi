@@ -103,7 +103,6 @@
         }, {
           "in" : "query",
           "name" : "orderType",
-          "description" : "Order type",
           "schema" : {
             "$ref" : "#/components/schemas/OrderTypeEnum"
           }
