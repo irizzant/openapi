@@ -250,6 +250,11 @@
               "type" : "string",
               "description" : "Commodity category\n",
               "example" : "H"
+            },
+            "commodity_sub_category" : {
+              "type" : "string",
+              "description" : "Commodity sub category\n",
+              "example" : "ABC"
             }
           },
           "required" : [ "english_description" ]
