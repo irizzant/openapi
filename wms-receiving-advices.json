@@ -63,7 +63,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PickTicketServiceResponse"
+                  "$ref" : "#/components/schemas/CreateReceivingAdviceResponse"
                 }
               }
             }
@@ -269,7 +269,10 @@
             }
           }
         },
-        "required" : [ "receiving_advice_header" ]
+        "required" : [ "receiving_advice_header" ],
+        "example" : [ {
+          "$ref" : "#/components/examples/ReceiptAdvicePieces"
+        } ]
       },
       "ReceiptAdviceBody" : {
         "oneOf" : [ {
@@ -482,7 +485,7 @@
         },
         "required" : [ "message", "statusCode" ]
       },
-      "PickTicketServiceResponse" : {
+      "CreateReceivingAdviceResponse" : {
         "type" : "object",
         "properties" : {
           "message" : {
@@ -491,39 +494,35 @@
         },
         "required" : [ "message" ],
         "example" : {
-          "message" : "Order created successfully"
+          "message" : "Receipt advice created successfully"
         }
       }
     },
     "examples" : {
-      "PickTicketPieces" : {
+      "ReceiptAdvicePieces" : {
         "value" : {
-          "pickticket_header" : [ {
-            "company" : "woman",
+          "receiving_advice_header" : {
+            "Company" : "woman",
             "warehouse" : "FDSNJ",
-            "pon" : "1234567890",
-            "po_date" : "2015-05-14",
-            "picking_reference" : "150007925",
-            "baby_invoice_date" : "2015-05-14",
-            "baby_invoice_number" : 9313,
-            "start_ship_date" : "2015-05-14",
-            "cancel_date" : "2015-05-20",
-            "requested_ship_date" : "2015-05-14",
-            "total_hanging_pieces" : "23",
-            "total_pieces" : "557",
-            "total_boxes" : "10",
-            "priority" : "A",
-            "pick_type" : "TO-SHIP",
-            "shipping_via" : "EXECUTIVE GROUP INTERNATIONAL",
-            "invoice_amount" : "7414,55",
-            "discount_amount" : "200,00",
-            "discount_percent" : "16,67",
-            "owner_reference" : "123456",
-            "dc_code" : "123",
-            "department" : "INTIMATE",
-            "terms_type" : "05",
-            "terms_net_days" : "30",
-            "channel" : "ABC",
+            "receiving_reference" : "",
+            "ra_number" : [ "RA123", "abc" ],
+            "master_invoice_date" : "2015-05-14",
+            "master_invoice_number" : 9.0,
+            "delivery_terms" : "",
+            "payment_terms" : "B07",
+            "currency" : "EURO",
+            "total_amount" : "11509.97",
+            "total_hanging_pieces" : "",
+            "total_pieces" : "880",
+            "total_boxes" : "21",
+            "client_code" : "033505",
+            "contact_phone" : 8.331860058E9,
+            "name" : "PAOLO ROSSI",
+            "address" : "VIA BIANCHI,6",
+            "city" : "FI",
+            "country" : "FIRENZE",
+            "state" : "",
+            "zip" : "235689",
             "custom_properties" : {
               "custom_property" : [ {
                 "name" : "CustomField1",
@@ -533,37 +532,7 @@
                 "value" : "CustomValue2"
               } ]
             },
-            "ship_to" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 428",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "sold_to" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 479",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "store" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 428",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "pickticket_body" : {
+            "receiving_advice_body" : {
               "pieces" : {
                 "sku" : [ {
                   "model" : "IMBAL.C1",
@@ -573,119 +542,17 @@
                   "barcode_sku" : "123456",
                   "barcode_ean" : "3000036057013",
                   "barcode_upc" : "",
-                  "qty" : 1,
+                  "qty" : "1",
                   "nrf_color" : "",
                   "nrf_size" : "",
                   "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
                   "wholesale_price" : "",
-                  "discount_amount" : "50,00",
-                  "discount_percent" : "16,67",
-                  "price_type" : "MARKDOWN",
                   "material_composition" : "",
-                  "order_line" : [ {
-                    "primary_reference" : "abc",
-                    "secondary_reference" : "456",
-                    "quantity" : "3"
-                  } ]
+                  "slot" : "A"
                 } ]
               }
             }
-          } ]
-        }
-      },
-      "PickTicketBoxes" : {
-        "value" : {
-          "pickticket_header" : [ {
-            "company" : "woman",
-            "warehouse" : 30,
-            "pon" : "1234567890",
-            "po_date" : "2015-05-14",
-            "picking_reference" : "150007925",
-            "baby_invoice_date" : "2015-05-14",
-            "baby_invoice_number" : 9313,
-            "start_ship_date" : "2015-05-14",
-            "cancel_date" : "2015-05-20",
-            "requested_ship_date" : "2015-05-14",
-            "total_hanging_pieces" : 23,
-            "total_pieces" : 557,
-            "total_boxes" : 10,
-            "priority" : "A",
-            "pick_type" : "TO-SHIP",
-            "shipping_via" : "EXECUTIVE GROUP INTERNATIONAL",
-            "invoice_amount" : "7414,55",
-            "discount_amount" : "200,00",
-            "discount_percent" : "16,67",
-            "owner_reference" : "123456",
-            "dc_code" : "123",
-            "department" : "INTIMATE",
-            "terms_type" : "05",
-            "terms_net_days" : 30,
-            "channel" : "ABC",
-            "lock_type" : "",
-            "custom_properties" : {
-              "custom_property" : [ {
-                "name" : "CustomField1",
-                "value" : "CustomValue1"
-              }, {
-                "name" : "CustomField2",
-                "value" : "CustomValue2"
-              } ]
-            },
-            "ship_to" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 428",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "sold_to" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 479",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "store" : {
-              "client_code" : 20938,
-              "contact_phone" : 91933005,
-              "name" : "CALZATURE SAPIA DI MINEO A. ) C. SRL",
-              "address" : "CSO BUTERA 428",
-              "city" : "BAGHERIA",
-              "country" : "IT",
-              "state" : "PA",
-              "zip" : "90011"
-            },
-            "pickticket_body" : {
-              "boxes" : {
-                "carton" : [ {
-                  "carton_type" : "PP",
-                  "carton_number" : "APC050234",
-                  "total_qty" : "23",
-                  "skus" : {
-                    "sku" : [ {
-                      "model" : "IMBAL.C1",
-                      "style" : "",
-                      "color" : "",
-                      "size" : "UNI",
-                      "barcode_sku" : "123456",
-                      "barcode_ean" : "3000036057013",
-                      "barcode_upc" : "",
-                      "wholesale_price" : "300,00",
-                      "discount_amount" : "50,00",
-                      "discount_percent" : "16,67",
-                      "qty" : "1"
-                    } ]
-                  }
-                } ]
-              }
-            }
-          } ]
+          }
         }
       },
       "ServerError" : {
