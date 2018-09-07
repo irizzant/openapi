@@ -551,6 +551,7 @@
             "type" : "array",
             "items" : {
               "type" : "object",
+              "description" : "Additional properties\n",
               "properties" : {
                 "name" : {
                   "type" : "string",
@@ -658,37 +659,40 @@
         },
         "required" : [ "carton_number" ]
       },
+      "BarcodeSkuUpcEan" : {
+        "anyOf" : [ {
+          "type" : "object",
+          "properties" : {
+            "barcode_sku" : {
+              "type" : "string",
+              "description" : "SKU\n",
+              "example" : "123456"
+            }
+          },
+          "required" : [ "barcode_sku" ]
+        }, {
+          "type" : "object",
+          "properties" : {
+            "barcode_ean" : {
+              "type" : "integer",
+              "description" : "EAN\n",
+              "example" : "3000036057013"
+            }
+          }
+        }, {
+          "type" : "object",
+          "properties" : {
+            "barcode_upc" : {
+              "type" : "integer",
+              "description" : "UPC\n",
+              "example" : "300003605701"
+            }
+          }
+        } ]
+      },
       "Sku" : {
         "allOf" : [ {
-          "anyOf" : [ {
-            "type" : "object",
-            "properties" : {
-              "barcode_sku" : {
-                "type" : "string",
-                "description" : "SKU\n",
-                "example" : "123456"
-              }
-            },
-            "required" : [ "barcode_sku" ]
-          }, {
-            "type" : "object",
-            "properties" : {
-              "barcode_ean" : {
-                "type" : "integer",
-                "description" : "EAN\n",
-                "example" : "3000036057013"
-              }
-            }
-          }, {
-            "type" : "object",
-            "properties" : {
-              "barcode_upc" : {
-                "type" : "integer",
-                "description" : "UPC\n",
-                "example" : "300003605701"
-              }
-            }
-          } ]
+          "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
         }, {
           "type" : "object",
           "properties" : {
