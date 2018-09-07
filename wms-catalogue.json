@@ -248,17 +248,15 @@
             "commodity_category" : {
               "type" : "string",
               "description" : "Commodity category. Will be provided during integration\n",
-              "example" : "H",
-              "required" : true
+              "example" : "H"
             },
             "commodity_sub_category" : {
               "type" : "string",
               "description" : "Commodity sub category. Will be provided during integration\n",
-              "example" : "ABC",
-              "required" : true
+              "example" : "ABC"
             }
           },
-          "required" : [ "english_description" ]
+          "required" : [ "english_description", "commodity_category", "commodity_sub_category" ]
         } ]
       },
       "BarcodeSkuUpcEan" : {
