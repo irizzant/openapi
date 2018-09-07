@@ -133,7 +133,11 @@
             "$ref" : "#/components/schemas/CatalogueHeader"
           },
           "catalog_body" : {
-            "$ref" : "#/components/schemas/CatalogueBody"
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/CatalogueBodyEdi"
+            }, {
+              "$ref" : "#/components/schemas/CatalogueBody"
+            } ]
           }
         },
         "required" : [ "catalog_header", "catalog_body" ]
@@ -226,16 +230,6 @@
               "description" : "Collection\n",
               "example" : "Eel skinny belt"
             },
-            "nrf_color" : {
-              "type" : "string",
-              "description" : "Color code NRF\n",
-              "example" : "10005"
-            },
-            "nrf_size" : {
-              "type" : "string",
-              "description" : "Size Code NRF\n",
-              "example" : "50001"
-            },
             "product_class" : {
               "type" : "string",
               "description" : "Product class\n",
@@ -254,9 +248,60 @@
               "type" : "string",
               "description" : "Commodity sub category. Will be provided during integration\n",
               "example" : "ABC"
+            },
+            "material_composition" : {
+              "type" : "string",
+              "description" : "Material composition\n",
+              "example" : "100% POLYESTER"
+            },
+            "hs_code" : {
+              "type" : "string",
+              "description" : "HTS Code for custom\n"
+            },
+            "product_id" : {
+              "type" : "string",
+              "description" : "Product code\n",
+              "example" : "11111111111"
             }
           },
           "required" : [ "english_description", "commodity_category" ]
+        } ]
+      },
+      "CatalogueBodyEdi" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/CatalogueBody"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "nrf_color" : {
+              "type" : "string",
+              "description" : "Color code NRF\n",
+              "example" : "10005"
+            },
+            "nrf_size" : {
+              "type" : "string",
+              "description" : "Size Code NRF\n",
+              "example" : "50001"
+            },
+            "catalog_provider" : {
+              "type" : "string",
+              "description" : "Catalog provider\n- \"G\": Gxs\n- \"I\": Intertrade\n- \"M\": Macy's\n- \"B\": Both Gxs/Intertrade\n",
+              "enum" : [ "G", "I", "M", "B" ],
+              "example" : "G"
+            },
+            "selection_code" : {
+              "type" : "string",
+              "description" : "Selection code.\nLogical commodity grouping within a catalogue provider\n",
+              "example" : "100",
+              "default" : "100"
+            },
+            "selection_code_description" : {
+              "type" : "string",
+              "description" : "Selection code description.\n",
+              "example" : "100"
+            }
+          },
+          "required" : [ "nrf_color", "nrf_size", "catalog_provider" ]
         } ]
       },
       "BarcodeSkuUpcEan" : {
