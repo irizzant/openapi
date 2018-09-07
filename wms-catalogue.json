@@ -131,205 +131,77 @@
         "type" : "object",
         "properties" : {
           "catalog_header" : {
-            "type" : "object",
-            "allOf" : [ {
-              "oneOf" : [ {
-                "type" : "object",
-                "properties" : {
-                  "receiving_reference" : {
-                    "type" : "string",
-                    "example" : "abcdef",
-                    "description" : "Unique reference for the receiving advice\n"
-                  }
-                }
-              }, {
-                "type" : "object",
-                "properties" : {
-                  "master_invoice_number" : {
-                    "type" : "string",
-                    "description" : "Master Invoice Number\n",
-                    "example" : "005-3324"
-                  },
-                  "master_invoice_date" : {
-                    "type" : "string",
-                    "format" : "date",
-                    "description" : "Master Inovice Date\n",
-                    "example" : "2018-03-15"
-                  }
-                }
-              } ]
-            }, {
-              "type" : "object",
-              "properties" : {
-                "Company" : {
-                  "type" : "string",
-                  "deprecated" : true
-                },
-                "warehouse" : {
-                  "type" : "integer",
-                  "example" : 30,
-                  "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
-                },
-                "ra_number" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "string"
-                  },
-                  "example" : "RA123",
-                  "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
-                },
-                "delivery_terms" : {
-                  "type" : "string",
-                  "description" : "Delivery terms.\nWill be only used as an additional note\n"
-                },
-                "payment_terms" : {
-                  "type" : "string",
-                  "description" : "Payment terms.\nWill be only used as an additional note\n"
-                },
-                "currency" : {
-                  "type" : "string",
-                  "description" : "Currency.\nWill be only used as an additional note\n"
-                },
-                "total_amount" : {
-                  "type" : "number",
-                  "format" : "double",
-                  "example" : 123.0,
-                  "description" : "Total amount. 2 decimal places.\n"
-                },
-                "total_hanging_pieces" : {
-                  "type" : "integer",
-                  "example" : 23,
-                  "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
-                },
-                "total_pieces" : {
-                  "type" : "integer",
-                  "example" : 557,
-                  "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
-                },
-                "total_boxes" : {
-                  "type" : "integer",
-                  "example" : 10,
-                  "description" : "Number of boxes.\nWill be only used as an additional note\n"
-                },
-                "client_code" : {
-                  "type" : "string",
-                  "example" : "12345",
-                  "description" : "Consignee code.\n"
-                },
-                "contact_phone" : {
-                  "type" : "string",
-                  "example" : "01-7788-7899",
-                  "description" : "Contact phone.\nWill be only used as an additional note\n"
-                },
-                "name" : {
-                  "type" : "string",
-                  "example" : "PAOLO ROSSI",
-                  "description" : "Consignee name.\n"
-                },
-                "address" : {
-                  "type" : "string",
-                  "example" : "VIA BIANCHI, 6",
-                  "description" : "Consignee address.\n"
-                },
-                "city" : {
-                  "type" : "string",
-                  "example" : "FI",
-                  "description" : "Consignee city.\n"
-                },
-                "country" : {
-                  "type" : "string",
-                  "example" : "IT",
-                  "description" : "Consignee country ISO code.\n"
-                },
-                "state" : {
-                  "type" : "string",
-                  "example" : "USCA",
-                  "description" : "Consignee state ISO code. Hyphen not supported\n"
-                },
-                "zip" : {
-                  "type" : "string",
-                  "example" : "123456",
-                  "description" : "Consignee ZIP\n"
-                },
-                "custom_properties" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "object",
-                    "description" : "Additional properties\n",
-                    "properties" : {
-                      "name" : {
-                        "type" : "string",
-                        "description" : "Name of the property\n",
-                        "example" : "Property"
-                      },
-                      "value" : {
-                        "type" : "string",
-                        "description" : "Value of the property\n",
-                        "example" : "Value"
-                      }
-                    }
-                  }
-                },
-                "receipt_advice_body" : {
-                  "$ref" : "#/components/schemas/ReceiptAdviceBody"
-                }
-              },
-              "required" : [ "warehouse", "receiving_reference", "receipt_advice_body" ]
-            } ]
+            "$ref" : "#/components/schemas/CatalogueHeader"
+          },
+          "catalog_body" : {
+            "$ref" : "#/components/schemas/CatalogueBody"
           }
         },
-        "required" : [ "catalog_header" ]
+        "required" : [ "catalog_header", "catalog_body" ]
       },
-      "ReceiptAdviceBody" : {
-        "oneOf" : [ {
-          "$ref" : "#/components/schemas/ReceiptAdviceBodyPieces"
-        }, {
-          "$ref" : "#/components/schemas/ReceiptAdviceBodyBoxes"
-        } ]
-      },
-      "ReceiptAdviceBodyBoxes" : {
+      "CatalogueHeader" : {
         "type" : "object",
         "properties" : {
-          "boxes" : {
-            "type" : "object",
-            "properties" : {
-              "carton" : {
-                "type" : "array",
-                "items" : {
-                  "$ref" : "#/components/schemas/Carton"
-                }
-              }
-            },
-            "required" : [ "carton" ]
-          }
-        },
-        "required" : [ "boxes" ]
-      },
-      "Carton" : {
-        "type" : "object",
-        "properties" : {
-          "carton_type" : {
+          "company" : {
             "type" : "string",
-            "enum" : [ "PP", "OPEN_STOCK" ],
-            "description" : "Carton type.\n- PP A carton which is going to be shipped \"as is\"\n- OPEN_STOCK A carton which is going to be opened and put on shelves upon receiving\n",
-            "example" : "PP"
-          },
-          "carton_number" : {
-            "type" : "string",
-            "description" : "Carton barcode\n",
-            "example" : "APC050234"
-          },
-          "total_qty" : {
-            "type" : "integer",
-            "description" : "Number of units in carton\n",
-            "example" : 23,
             "deprecated" : true
           },
-          "skus" : {
-            "$ref" : "#/components/schemas/Sku"
+          "year" : {
+            "type" : "integer",
+            "description" : "Article's year\n",
+            "example" : 2018
+          },
+          "season" : {
+            "type" : "string",
+            "description" : "Article's season\n",
+            "example" : "FW"
+          },
+          "total" : {
+            "type" : "integer",
+            "example" : 2000,
+            "description" : "Number of articles included in the request body\n"
           }
         },
-        "required" : [ "carton_number", "carton_type", "skus" ]
+        "required" : [ "total" ]
+      },
+      "CatalogueBody" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "style" : {
+              "type" : "string",
+              "example" : "B00009",
+              "description" : "Article's style\n"
+            },
+            "model" : {
+              "type" : "string",
+              "example" : "E001V",
+              "description" : "Article's model\n"
+            },
+            "color" : {
+              "type" : "string",
+              "example" : "200",
+              "description" : "Article's color code\n"
+            },
+            "color_name" : {
+              "type" : "string",
+              "example" : "200",
+              "description" : "Article's color description\n"
+            },
+            "size" : {
+              "type" : "string",
+              "example" : "S",
+              "description" : "Article's size code\n"
+            },
+            "size_position" : {
+              "type" : "string",
+              "example" : "V",
+              "description" : "Article's size position\n"
+            }
+          }
+        } ]
       },
       "BarcodeSkuUpcEan" : {
         "anyOf" : [ {
