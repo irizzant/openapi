@@ -323,6 +323,7 @@
     "schemas" : {
       "OrderTypeEnum" : {
         "type" : "string",
+        "description" : "Order type. Will be provided during the integration",
         "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
       },
       "PickTicket" : {
