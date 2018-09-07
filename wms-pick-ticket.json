@@ -433,157 +433,169 @@
         }
       },
       "PickTicketHeader" : {
-        "type" : "object",
-        "properties" : {
-          "company" : {
-            "type" : "string",
-            "example" : "woman",
-            "deprecated" : true
-          },
-          "warehouse" : {
-            "type" : "integer",
-            "example" : 30,
-            "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
-          },
-          "pon" : {
-            "type" : "string",
-            "example" : "1234567890",
-            "description" : "Purchase Order"
-          },
-          "po_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14"
-          },
-          "picking_reference" : {
-            "type" : "string",
-            "example" : "abc",
-            "description" : "Your internal order reference. Must be unique.\n"
-          },
-          "baby_invoice_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Invoice date / Pick ticket date\n"
-          },
-          "baby_invoice_number" : {
-            "type" : "string",
-            "example" : "abc",
-            "description" : "Invoice number.\nRequired if you DON'T specify a \"picking_reference\"\n"
-          },
-          "start_ship_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Date to ship from"
-          },
-          "cancel_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Date to ship to"
-          },
-          "requested_ship_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Requested ship date"
-          },
-          "total_hanging_pieces" : {
-            "type" : "integer",
-            "example" : 23,
-            "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
-          },
-          "total_pieces" : {
-            "type" : "integer",
-            "example" : 557,
-            "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
-          },
-          "total_boxes" : {
-            "type" : "integer",
-            "example" : 10,
-            "description" : "Number of boxes.\nWill be only used as an additional note\n"
-          },
-          "priority" : {
-            "type" : "integer",
-            "example" : "A",
-            "description" : "Order priority"
-          },
-          "shipping_via" : {
-            "type" : "string",
-            "example" : "EXECUTIVE GROUP INTERNATIONAL"
-          },
-          "invoice_amount" : {
-            "type" : "number",
-            "format" : "double",
-            "example" : 7414.55,
-            "description" : "Gross invoice amount. 2 decimal places\n"
-          },
-          "discount_amount" : {
-            "type" : "number",
-            "format" : "double",
-            "example" : 200.0,
-            "description" : "Discount amount. 2 decimal places\n"
-          },
-          "discount_percent" : {
-            "type" : "number",
-            "format" : "double",
-            "example" : 200.0,
-            "description" : "Discount percent. 2 decimal places\n"
-          },
-          "owner_reference" : {
-            "type" : "string",
-            "example" : 123456,
-            "description" : "Owner reference\n"
-          },
-          "channel" : {
-            "type" : "string",
-            "description" : "The selling channel\n",
-            "example" : "ABC"
-          },
-          "lock_type" : {
-            "type" : "string",
-            "example" : "",
-            "enum" : [ "", "N", "B" ],
-            "description" : "Code to identify the available operations on the created order.\nWill be provided during the integration.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n"
-          },
-          "custom_properties" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object",
-              "description" : "Additional properties\n",
-              "properties" : {
-                "name" : {
-                  "type" : "string",
-                  "description" : "Name of the property\n",
-                  "example" : "Property"
-                },
-                "value" : {
-                  "type" : "string",
-                  "description" : "Value of the property\n",
-                  "example" : "Value"
-                }
+        "allOf" : [ {
+          "oneOf" : [ {
+            "type" : "object",
+            "properties" : {
+              "picking_reference" : {
+                "type" : "string",
+                "example" : "abc",
+                "description" : "Your internal order reference. Must be unique.\n"
               }
             }
+          }, {
+            "type" : "object",
+            "properties" : {
+              "baby_invoice_number" : {
+                "type" : "string",
+                "example" : "abc",
+                "description" : "Invoice number.\n"
+              },
+              "baby_invoice_date" : {
+                "type" : "string",
+                "format" : "date",
+                "example" : "2015-05-14",
+                "description" : "Invoice date / Pick ticket date\n"
+              }
+            }
+          } ]
+        }, {
+          "type" : "object",
+          "properties" : {
+            "company" : {
+              "type" : "string",
+              "example" : "woman",
+              "deprecated" : true
+            },
+            "warehouse" : {
+              "type" : "integer",
+              "example" : 30,
+              "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
+            },
+            "pon" : {
+              "type" : "string",
+              "example" : "1234567890",
+              "description" : "Purchase Order"
+            },
+            "po_date" : {
+              "type" : "string",
+              "format" : "date",
+              "example" : "2015-05-14"
+            },
+            "start_ship_date" : {
+              "type" : "string",
+              "format" : "date",
+              "example" : "2015-05-14",
+              "description" : "Date to ship from"
+            },
+            "cancel_date" : {
+              "type" : "string",
+              "format" : "date",
+              "example" : "2015-05-14",
+              "description" : "Date to ship to"
+            },
+            "requested_ship_date" : {
+              "type" : "string",
+              "format" : "date",
+              "example" : "2015-05-14",
+              "description" : "Requested ship date"
+            },
+            "total_hanging_pieces" : {
+              "type" : "integer",
+              "example" : 23,
+              "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
+            },
+            "total_pieces" : {
+              "type" : "integer",
+              "example" : 557,
+              "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
+            },
+            "total_boxes" : {
+              "type" : "integer",
+              "example" : 10,
+              "description" : "Number of boxes.\nWill be only used as an additional note\n"
+            },
+            "priority" : {
+              "type" : "integer",
+              "example" : "A",
+              "description" : "Order priority"
+            },
+            "shipping_via" : {
+              "type" : "string",
+              "example" : "EXECUTIVE GROUP INTERNATIONAL"
+            },
+            "invoice_amount" : {
+              "type" : "number",
+              "format" : "double",
+              "example" : 7414.55,
+              "description" : "Gross invoice amount. 2 decimal places\n"
+            },
+            "discount_amount" : {
+              "type" : "number",
+              "format" : "double",
+              "example" : 200.0,
+              "description" : "Discount amount. 2 decimal places\n"
+            },
+            "discount_percent" : {
+              "type" : "number",
+              "format" : "double",
+              "example" : 200.0,
+              "description" : "Discount percent. 2 decimal places\n"
+            },
+            "owner_reference" : {
+              "type" : "string",
+              "example" : 123456,
+              "description" : "Owner reference\n"
+            },
+            "channel" : {
+              "type" : "string",
+              "description" : "The selling channel\n",
+              "example" : "ABC"
+            },
+            "lock_type" : {
+              "type" : "string",
+              "example" : "",
+              "enum" : [ "", "N", "B" ],
+              "description" : "Code to identify the available operations on the created order.\nWill be provided during the integration.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n"
+            },
+            "custom_properties" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "description" : "Additional properties\n",
+                "properties" : {
+                  "name" : {
+                    "type" : "string",
+                    "description" : "Name of the property\n",
+                    "example" : "Property"
+                  },
+                  "value" : {
+                    "type" : "string",
+                    "description" : "Value of the property\n",
+                    "example" : "Value"
+                  }
+                }
+              }
+            },
+            "ship_to" : {
+              "$ref" : "#/components/schemas/Actor"
+            },
+            "sold_to" : {
+              "$ref" : "#/components/schemas/Actor"
+            },
+            "store" : {
+              "$ref" : "#/components/schemas/Actor"
+            },
+            "pick_ticket_body" : {
+              "oneOf" : [ {
+                "$ref" : "#/components/schemas/PickTicketBodyBoxes"
+              }, {
+                "$ref" : "#/components/schemas/PickTicketBodyPieces"
+              } ]
+            }
           },
-          "ship_to" : {
-            "$ref" : "#/components/schemas/Actor"
-          },
-          "sold_to" : {
-            "$ref" : "#/components/schemas/Actor"
-          },
-          "store" : {
-            "$ref" : "#/components/schemas/Actor"
-          },
-          "pick_ticket_body" : {
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/PickTicketBodyBoxes"
-            }, {
-              "$ref" : "#/components/schemas/PickTicketBodyPieces"
-            } ]
-          }
-        },
-        "required" : [ "warehouse", "picking_reference", "ship_to", "pick_ticket_body" ]
+          "required" : [ "warehouse", "picking_reference", "ship_to", "pick_ticket_body" ]
+        } ]
       },
       "PickTicketHeaderEdi" : {
         "allOf" : [ {
