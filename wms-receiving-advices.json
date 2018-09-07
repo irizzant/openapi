@@ -353,6 +353,35 @@
       },
       "Sku" : {
         "allOf" : [ {
+          "$ref" : "#/components/schemas/SkuPieces"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "pieces" : {
+              "$ref" : "#/components/schemas/SkuPiece"
+            }
+          }
+        } ]
+      },
+      "SkuPiece" : {
+        "type" : "object",
+        "properties" : {
+          "piece" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "external_barcode" : {
+                  "type" : "string",
+                  "description" : "Barcode of the piece\n"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SkuPieces" : {
+        "allOf" : [ {
           "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
         }, {
           "type" : "object",
@@ -418,98 +447,28 @@
               "description" : "Logical grouping of commodity\n",
               "example" : "U13",
               "default" : ""
-            },
-            "pieces" : {
-              "$ref" : "#/components/schemas/SkuPiece"
             }
           },
           "required" : [ "qty", "slot" ]
         } ]
       },
-      "SkuPiece" : {
-        "type" : "object",
-        "properties" : {
-          "piece" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object",
-              "properties" : {
-                "external_barcode" : {
-                  "type" : "string",
-                  "description" : "Barcode of the piece\n"
-                }
-              }
-            }
-          }
-        }
-      },
-      "SkuPieces" : {
-        "type" : "object",
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/Sku"
-        }, {
-          "type" : "object",
-          "properties" : {
-            "nrf_color" : {
-              "type" : "string",
-              "description" : "Color code NRF\n",
-              "deprecated" : true
-            },
-            "nrf_size" : {
-              "type" : "string",
-              "description" : "Size Code NRF\n",
-              "deprecated" : true
-            },
-            "description" : {
-              "type" : "string",
-              "description" : "Article description\n",
-              "example" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
-              "deprecated" : true
-            },
-            "price_type" : {
-              "type" : "string",
-              "description" : "Price type\n",
-              "example" : "MARKDOWN"
-            },
-            "material_composition" : {
-              "type" : "string",
-              "description" : "Material composition\n",
-              "example" : "100% POLYESTER"
-            },
-            "order_line" : {
-              "type" : "array",
-              "items" : {
-                "type" : "object",
-                "properties" : {
-                  "primary_reference" : {
-                    "type" : "string",
-                    "description" : "Primary reference\n",
-                    "example" : "abc"
-                  },
-                  "secondary_reference" : {
-                    "type" : "string",
-                    "description" : "Secondary reference\n",
-                    "example" : "123"
-                  },
-                  "quantity" : {
-                    "type" : "integer",
-                    "description" : "Quantity\n",
-                    "example" : 3
-                  }
-                },
-                "required" : [ "primary_reference", "quantity" ]
-              }
-            }
-          }
-        } ]
-      },
       "ReceiptAdviceBodyPieces" : {
         "type" : "object",
         "properties" : {
-          "a" : {
-            "type" : "string"
+          "pieces" : {
+            "type" : "object",
+            "properties" : {
+              "sku" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/SkuPieces"
+                }
+              }
+            },
+            "required" : [ "sku" ]
           }
-        }
+        },
+        "required" : [ "pieces" ]
       },
       "InternalServerError" : {
         "type" : "object",
