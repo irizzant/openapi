@@ -173,32 +173,32 @@
             "style" : {
               "type" : "string",
               "example" : "B00009",
-              "description" : "Article's style\n"
+              "description" : "Style\n"
             },
             "model" : {
               "type" : "string",
               "example" : "E001V",
-              "description" : "Article's model\n"
+              "description" : "Model\n"
             },
             "color" : {
               "type" : "string",
               "example" : "200",
-              "description" : "Article's color code\n"
+              "description" : "Color code\n"
             },
             "color_name" : {
               "type" : "string",
               "example" : "200",
-              "description" : "Article's color description\n"
+              "description" : "Color description\n"
             },
             "size" : {
               "type" : "string",
               "example" : "S",
-              "description" : "Article's size code\n"
+              "description" : "Size code\n"
             },
             "size_position" : {
               "type" : "string",
               "example" : "V",
-              "description" : "Article's size position\n"
+              "description" : "Size position\n"
             },
             "wholesale_price" : {
               "type" : "number",
@@ -211,8 +211,48 @@
               "format" : "double",
               "description" : "Retail price. 2 decimal places\n",
               "example" : 500.0
+            },
+            "description" : {
+              "type" : "string",
+              "description" : "Description (in foreign language)\n",
+              "example" : "PANTALONE CHIARO"
+            },
+            "english_description" : {
+              "type" : "string",
+              "description" : "Description (in English)\n",
+              "example" : "WHITE T-SHIRT"
+            },
+            "name" : {
+              "type" : "string",
+              "description" : "Collection\n",
+              "example" : "Eel skinny belt"
+            },
+            "nrf_color" : {
+              "type" : "string",
+              "description" : "Color code NRF\n",
+              "example" : "10005"
+            },
+            "nrf_size" : {
+              "type" : "string",
+              "description" : "Size Code NRF\n",
+              "example" : "50001"
+            },
+            "product_class" : {
+              "type" : "string",
+              "description" : "Product class\n",
+              "example" : "33902"
+            },
+            "commodity_group" : {
+              "type" : "string",
+              "description" : "Commodity group\n"
+            },
+            "commodity_category" : {
+              "type" : "string",
+              "description" : "Commodity category\n",
+              "example" : "H"
             }
-          }
+          },
+          "required" : [ "english_description" ]
         } ]
       },
       "BarcodeSkuUpcEan" : {
