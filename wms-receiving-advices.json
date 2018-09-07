@@ -149,6 +149,12 @@
                       "type" : "string",
                       "description" : "Master Invoice Number\n",
                       "example" : "005-3324"
+                    },
+                    "master_invoice_date" : {
+                      "type" : "string",
+                      "format" : "date",
+                      "description" : "Master Inovice Date\n",
+                      "example" : "2018-03-15"
                     }
                   }
                 } ]
@@ -171,12 +177,6 @@
                     },
                     "example" : "RA123",
                     "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
-                  },
-                  "master_invoice_date" : {
-                    "type" : "string",
-                    "format" : "date",
-                    "description" : "Master Inovice Date\n",
-                    "example" : "2018-03-15"
                   },
                   "delivery_terms" : {
                     "type" : "string",
@@ -259,6 +259,9 @@
                         "type" : "string"
                       }
                     }
+                  },
+                  "receipt_advice_body" : {
+                    "$ref" : "#/components/schemas/ReceiptAdviceBody"
                   }
                 },
                 "required" : [ "warehouse", "receiving_reference", "receipt_advice_body" ]
@@ -268,188 +271,14 @@
         },
         "required" : [ "receiving_advice_header" ]
       },
-      "PickTicketHeader" : {
-        "type" : "object",
-        "properties" : {
-          "company" : {
-            "type" : "string",
-            "example" : "woman",
-            "deprecated" : true
-          },
-          "warehouse" : {
-            "type" : "integer",
-            "example" : 30,
-            "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
-          },
-          "pon" : {
-            "type" : "string",
-            "example" : "1234567890",
-            "description" : "Purchase Order"
-          },
-          "po_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14"
-          },
-          "picking_reference" : {
-            "type" : "string",
-            "example" : "abc",
-            "description" : "Your internal order reference. Must be unique.\n"
-          },
-          "baby_invoice_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Invoice date / Pick ticket date\n"
-          },
-          "baby_invoice_number" : {
-            "type" : "string",
-            "example" : "abc",
-            "description" : "Invoice number.\nRequired if you DON'T specify a \"picking_reference\"\n"
-          },
-          "start_ship_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Date to ship from"
-          },
-          "cancel_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Date to ship to"
-          },
-          "requested_ship_date" : {
-            "type" : "string",
-            "format" : "date",
-            "example" : "2015-05-14",
-            "description" : "Requested ship date"
-          },
-          "total_hanging_pieces" : {
-            "type" : "integer",
-            "example" : 23,
-            "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
-          },
-          "total_pieces" : {
-            "type" : "integer",
-            "example" : 557,
-            "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
-          },
-          "total_boxes" : {
-            "type" : "integer",
-            "example" : 10,
-            "description" : "Number of boxes"
-          },
-          "priority" : {
-            "type" : "integer",
-            "example" : "A",
-            "description" : "Order priority"
-          },
-          "pick_type" : {
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/OrderTypeEnum"
-            }, {
-              "type" : "string",
-              "example" : "TO-SHIP"
-            } ],
-            "description" : "Order type.\nMutually exclusive with header parameter orderType\n"
-          },
-          "shipping_via" : {
-            "type" : "string",
-            "example" : "EXECUTIVE GROUP INTERNATIONAL"
-          },
-          "invoice_amount" : {
-            "type" : "number",
-            "format" : "double",
-            "example" : 7414.55,
-            "description" : "Gross invoice amount. 2 decimal places\n"
-          },
-          "discount_amount" : {
-            "type" : "number",
-            "format" : "double",
-            "example" : 200,
-            "description" : "Discount amount. 2 decimal places\n"
-          },
-          "discount_percent" : {
-            "type" : "number",
-            "format" : "double",
-            "example" : 200,
-            "description" : "Discount percent. 2 decimal places\n"
-          },
-          "owner_reference" : {
-            "type" : "string",
-            "example" : 123456,
-            "description" : "Owner reference\n"
-          },
-          "channel" : {
-            "type" : "string",
-            "description" : "The selling channel\n",
-            "example" : "ABC"
-          },
-          "lock_type" : {
-            "type" : "string",
-            "example" : "",
-            "enum" : [ "", "N", "B" ],
-            "description" : "Code to identify the available operations on the created order.\nWill be provided during the integration.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n"
-          },
-          "custom_properties" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object",
-              "additionalProperties" : {
-                "type" : "string"
-              }
-            }
-          },
-          "ship_to" : {
-            "$ref" : "#/components/schemas/Actor"
-          },
-          "sold_to" : {
-            "$ref" : "#/components/schemas/Actor"
-          },
-          "store" : {
-            "$ref" : "#/components/schemas/Actor"
-          },
-          "pick_ticket_body" : {
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/PickTicketBodyBoxes"
-            }, {
-              "$ref" : "#/components/schemas/PickTicketBodyPieces"
-            } ]
-          }
-        },
-        "required" : [ "warehouse", "picking_reference", "ship_to", "pick_ticket_body" ]
-      },
-      "PickTicketHeaderEdi" : {
-        "allOf" : [ {
-          "$ref" : "#/components/schemas/PickTicketHeader"
+      "ReceiptAdviceBody" : {
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/ReceiptAdviceBodyPieces"
         }, {
-          "type" : "object",
-          "properties" : {
-            "dc_code" : {
-              "type" : "string",
-              "description" : "For EDI shipments, identifies the distribution\ncenter code.\n",
-              "example" : "123"
-            },
-            "department" : {
-              "type" : "string",
-              "description" : "For EDI shipments, identifies the department\n",
-              "example" : "INTIMATE"
-            },
-            "terms_type" : {
-              "type" : "string",
-              "enum" : [ 1, 2, 5, 8, 12, 14 ],
-              "description" : "For EDI shipments, identifies the payment terms type\n- \"01\" Basic\n- \"02\" End of Month (EOM)\n- \"05\" Discount Not Applicable\n- \"08\" Basic Discount Offered\n- \"12\" 10 Days After End of Month (10 EOM)\n- \"14\" Previously Agreed Upon\n"
-            },
-            "terms_net_days" : {
-              "type" : "integer",
-              "description" : "For EDI shipments, identifies the number of days\nafter which the payment is due\n",
-              "example" : 30
-            }
-          }
+          "$ref" : "#/components/schemas/ReceiptAdviceBodyBoxes"
         } ]
       },
-      "PickTicketBodyBoxes" : {
+      "ReceiptAdviceBodyBoxes" : {
         "type" : "object",
         "properties" : {
           "boxes" : {
@@ -461,11 +290,9 @@
                   "$ref" : "#/components/schemas/Carton"
                 }
               }
-            },
-            "required" : [ "carton" ]
+            }
           }
-        },
-        "required" : [ "boxes" ]
+        }
       },
       "Carton" : {
         "type" : "object",
@@ -473,8 +300,7 @@
           "carton_type" : {
             "type" : "string",
             "enum" : [ "PP", "OPEN_STOCK" ],
-            "deprecated" : true,
-            "description" : "Carton type\n",
+            "description" : "Carton type.\n- PP A carton which is going to be shipped \"as is\"\n- OPEN_STOCK A carton which is going to be opened and put on shelves upon receiving\n",
             "example" : "PP"
           },
           "carton_number" : {
@@ -492,76 +318,95 @@
             "$ref" : "#/components/schemas/Sku"
           }
         },
-        "required" : [ "carton_number" ]
+        "required" : [ "carton_number", "carton_type", "skus" ]
+      },
+      "BarcodeSkuUpcEan" : {
+        "anyOf" : [ {
+          "type" : "object",
+          "properties" : {
+            "barcode_sku" : {
+              "type" : "string",
+              "description" : "SKU\n",
+              "example" : "123456"
+            }
+          },
+          "required" : [ "barcode_sku" ]
+        }, {
+          "type" : "object",
+          "properties" : {
+            "barcode_ean" : {
+              "type" : "integer",
+              "description" : "EAN\n",
+              "example" : "3000036057013"
+            }
+          }
+        }, {
+          "type" : "object",
+          "properties" : {
+            "barcode_upc" : {
+              "type" : "integer",
+              "description" : "UPC\n",
+              "example" : "300003605701"
+            }
+          }
+        } ]
       },
       "Sku" : {
         "allOf" : [ {
-          "anyOf" : [ {
-            "type" : "object",
-            "properties" : {
-              "barcode_sku" : {
-                "type" : "string",
-                "description" : "SKU\n",
-                "example" : "123456"
-              }
-            }
-          }, {
-            "type" : "object",
-            "properties" : {
-              "barcode_ean" : {
-                "type" : "integer",
-                "description" : "EAN\n",
-                "example" : "3000036057013"
-              }
-            }
-          }, {
-            "type" : "object",
-            "properties" : {
-              "barcode_upc" : {
-                "type" : "integer",
-                "description" : "UPC\n",
-                "example" : "300003605701"
-              }
-            }
-          } ]
+          "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
         }, {
           "type" : "object",
           "properties" : {
             "model" : {
               "type" : "string",
               "description" : "Model\n",
-              "example" : "IMBAL.C1"
+              "example" : "IMBAL.C1",
+              "deprecated" : true
             },
             "style" : {
               "type" : "string",
-              "description" : "Style\n"
+              "description" : "Style\n",
+              "deprecated" : true
             },
             "color" : {
               "type" : "string",
-              "description" : "Color\n"
+              "description" : "Color\n",
+              "deprecated" : true
             },
             "size" : {
               "type" : "string",
               "description" : "Size\n",
-              "example" : "UNI"
+              "example" : "UNI",
+              "deprecated" : true
+            },
+            "nrf_color" : {
+              "type" : "string",
+              "description" : "Color code NRF\n",
+              "deprecated" : true
+            },
+            "nrf_size" : {
+              "type" : "string",
+              "description" : "Size Code NRF\n",
+              "deprecated" : true
+            },
+            "description" : {
+              "type" : "string",
+              "description" : "Article description\n",
+              "example" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
+              "deprecated" : true
+            },
+            "material_composition" : {
+              "type" : "string",
+              "description" : "Material composition\n",
+              "example" : "100% POLYESTER",
+              "deprecated" : true
             },
             "wholesale_price" : {
               "type" : "number",
               "format" : "double",
               "description" : "Unit price. 2 decimal places\n",
-              "example" : 300
-            },
-            "discount_amount" : {
-              "type" : "number",
-              "format" : "double",
-              "description" : "Discount amount. 2 decimal places\n",
-              "example" : 300
-            },
-            "discount_percent" : {
-              "type" : "number",
-              "format" : "double",
-              "description" : "Discount percent. 2 decimal places\n",
-              "example" : 0.5
+              "example" : 300.0,
+              "deprecated" : true
             },
             "qty" : {
               "type" : "integer",
@@ -571,11 +416,32 @@
             "slot" : {
               "type" : "string",
               "description" : "Logical grouping of commodity\n",
-              "example" : "U13"
+              "example" : "U13",
+              "default" : ""
+            },
+            "pieces" : {
+              "$ref" : "#/components/schemas/SkuPiece"
             }
           },
-          "required" : [ "qty" ]
+          "required" : [ "qty", "slot" ]
         } ]
+      },
+      "SkuPiece" : {
+        "type" : "object",
+        "properties" : {
+          "piece" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "external_barcode" : {
+                  "type" : "string",
+                  "description" : "Barcode of the piece\n"
+                }
+              }
+            }
+          }
+        }
       },
       "SkuPieces" : {
         "type" : "object",
@@ -637,68 +503,13 @@
           }
         } ]
       },
-      "PickTicketBodyPieces" : {
+      "ReceiptAdviceBodyPieces" : {
         "type" : "object",
         "properties" : {
-          "pieces" : {
-            "type" : "object",
-            "properties" : {
-              "sku" : {
-                "type" : "array",
-                "items" : {
-                  "$ref" : "#/components/schemas/SkuPieces"
-                }
-              }
-            },
-            "required" : [ "pieces" ]
+          "a" : {
+            "type" : "string"
           }
         }
-      },
-      "Actor" : {
-        "type" : "object",
-        "properties" : {
-          "client_code" : {
-            "type" : "string",
-            "description" : "Code to be assigned\n"
-          },
-          "contact_phone" : {
-            "type" : "string",
-            "format" : "phone",
-            "description" : "Contact phone\n",
-            "example" : "09-1933005"
-          },
-          "name" : {
-            "type" : "string",
-            "description" : "Name\n",
-            "example" : "CALZATURE SAPIA DI MINEO A. ) C. SRL"
-          },
-          "address" : {
-            "type" : "string",
-            "description" : "Address\n",
-            "example" : "CSO BUTERA 428"
-          },
-          "city" : {
-            "type" : "string",
-            "description" : "\"City\"\n",
-            "example" : "BAGHERIA"
-          },
-          "country" : {
-            "type" : "string",
-            "description" : "Country ISO code\n",
-            "example" : "US"
-          },
-          "state" : {
-            "type" : "string",
-            "description" : "State ISO code, or province\n",
-            "example" : "CA"
-          },
-          "zip" : {
-            "type" : "string",
-            "description" : "ZIP\n",
-            "example" : "90011"
-          }
-        },
-        "required" : [ "client_code", "name", "address", "city", "country", "state", "zip" ]
       },
       "InternalServerError" : {
         "type" : "object",
