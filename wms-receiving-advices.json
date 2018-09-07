@@ -5,7 +5,7 @@
     "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-receiving-advices/1.0.0"
   }, {
     "description" : "Production",
-    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/"
+    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/receivingAdviceService"
   }, {
     "description" : "Test/Stage",
     "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/"
