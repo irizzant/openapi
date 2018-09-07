@@ -53,7 +53,7 @@
             "enum" : [ "ADD_ALL_ARTICLES", "ADD_ONLY_CHANGED_ARTICLES" ]
           },
           "example" : 30,
-          "description" : "Used to publish the articles to GXS, Inovis (where integrations is enabled)\n- \"ADD_ALL_ARTICLES\" publish all the articles\n- \"ADD_ONLY_CHANGED_ARTICLES\" publish only the changed articles\n"
+          "description" : "Used to publish the articles to GXS, Inovis (where integrations are enabled)\n- \"ADD_ALL_ARTICLES\" publish all the articles\n- \"ADD_ONLY_CHANGED_ARTICLES\" publish only the changed articles\n"
         } ],
         "requestBody" : {
           "required" : true,
