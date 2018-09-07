@@ -199,6 +199,18 @@
               "type" : "string",
               "example" : "V",
               "description" : "Article's size position\n"
+            },
+            "wholesale_price" : {
+              "type" : "number",
+              "format" : "double",
+              "description" : "Unit price. 2 decimal places\n",
+              "example" : 300.0
+            },
+            "retail_price" : {
+              "type" : "number",
+              "format" : "double",
+              "description" : "Retail price. 2 decimal places\n",
+              "example" : 500.0
             }
           }
         } ]
