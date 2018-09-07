@@ -61,11 +61,21 @@
             "application/json" : {
               "schema" : {
                 "$ref" : "#/components/schemas/Catalogue"
+              },
+              "examples" : {
+                "Catalogue" : {
+                  "$ref" : "#/components/examples/Catalogue"
+                }
               }
             },
             "application/xml" : {
               "schema" : {
                 "$ref" : "#/components/schemas/Catalogue"
+              },
+              "examples" : {
+                "Catalogue" : {
+                  "$ref" : "#/components/examples/Catalogue"
+                }
               }
             }
           }
@@ -429,7 +439,7 @@
       }
     },
     "examples" : {
-      "Catalog" : {
+      "Catalogue" : {
         "value" : {
           "catalog_header" : {
             "company" : "PRS",
