@@ -4,9 +4,6 @@
     "description" : "SwaggerHub API Auto Mocking",
     "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-catalogue/1.0.0"
   }, {
-    "description" : "SwaggerHub API Auto Mocking",
-    "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-catalogue/1.0.0"
-  }, {
     "description" : "Production",
     "url" : "https://webapps.sdb.it/webtng/wsrest/wms/catalogService/1.0.0"
   }, {
