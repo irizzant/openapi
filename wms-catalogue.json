@@ -1,0 +1,747 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-catalogue/1.0.0"
+  }, {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/SDB-IT/wms-receiving-advices/1.0.0"
+  }, {
+    "description" : "Production",
+    "url" : "https://webapps.sdb.it/webtng/wsrest/wms/catalogService/1.0.0"
+  }, {
+    "description" : "Test/Stage",
+    "url" : "https://stage.savinodelbene.com/webtng/wsrest/wms/catalogService/1.0.0"
+  } ],
+  "info" : {
+    "description" : "API to create/modify catalogue items in WMS",
+    "version" : "1.0.0",
+    "title" : "Catalogue Items",
+    "contact" : {
+      "email" : "wms@tech.sdb.it"
+    }
+  },
+  "tags" : [ {
+    "name" : "Catalogue items",
+    "description" : "Catalogue items"
+  } ],
+  "paths" : {
+    "/catalog" : {
+      "put" : {
+        "tags" : [ "Catalogue items" ],
+        "summary" : "Create/Modify a catalogue item in WMS",
+        "operationId" : "createOrder",
+        "description" : "API to create or modify a catalogue item in WMS\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/TIMESTAMP_PARAM"
+        }, {
+          "$ref" : "#/components/parameters/HMAC_PARAM"
+        }, {
+          "in" : "query",
+          "name" : "warehouseId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 30,
+          "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n",
+          "required" : true
+        }, {
+          "in" : "query",
+          "name" : "publishMode",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ADD_ALL_ARTICLES", "ADD_ONLY_CHANGED_ARTICLES" ]
+          },
+          "example" : 30,
+          "description" : "Used to publish the articles to GXS, Inovis (where integrations is enabled)\n- \"ADD_ALL_ARTICLES\" publish all the articles\n- \"ADD_ONLY_CHANGED_ARTICLES\" publish only the changed articles\n",
+          "required" : true
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReceivingAdvice"
+              },
+              "examples" : {
+                "ReceiptAdviceBoxes" : {
+                  "$ref" : "#/components/examples/ReceiptAdviceBoxes"
+                },
+                "ReceiptAdvicePieces" : {
+                  "$ref" : "#/components/examples/ReceiptAdvicePieces"
+                }
+              }
+            },
+            "application/xml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ReceivingAdvice"
+              },
+              "examples" : {
+                "ReceiptAdviceBoxes" : {
+                  "$ref" : "#/components/examples/ReceiptAdviceBoxes"
+                },
+                "ReceiptAdvicePieces" : {
+                  "$ref" : "#/components/examples/ReceiptAdvicePieces"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "2XX" : {
+            "description" : "Successfully completed operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreateReceivingAdviceResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/InternalServerError"
+                },
+                "examples" : {
+                  "serverError" : {
+                    "$ref" : "#/components/examples/ServerError"
+                  },
+                  "badParameter" : {
+                    "$ref" : "#/components/examples/BadParameter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "parameters" : {
+      "TIMESTAMP_PARAM" : {
+        "in" : "header",
+        "name" : "TIMESTAMP_PARAM",
+        "required" : true,
+        "description" : "Unix timestamp",
+        "schema" : {
+          "type" : "string",
+          "pattern" : "^[0-9]+$"
+        }
+      },
+      "HMAC_PARAM" : {
+        "in" : "header",
+        "name" : "HMAC_PARAM",
+        "required" : true,
+        "description" : "HMAC MD5 of the query string.\nThis param MUST NOT be included in HMAC calculation\n",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "orderReferencePrefix" : {
+        "in" : "query",
+        "name" : "orderReferencePrefix",
+        "description" : "Prefix to prepend to the order reference",
+        "schema" : {
+          "type" : "string"
+        }
+      }
+    },
+    "schemas" : {
+      "OrderTypeEnum" : {
+        "type" : "string",
+        "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
+      },
+      "ReceivingAdvice" : {
+        "type" : "object",
+        "properties" : {
+          "receiving_advice_header" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "allOf" : [ {
+                "oneOf" : [ {
+                  "type" : "object",
+                  "properties" : {
+                    "receiving_reference" : {
+                      "type" : "string",
+                      "example" : "abcdef",
+                      "description" : "Unique reference for the receiving advice\n"
+                    }
+                  }
+                }, {
+                  "type" : "object",
+                  "properties" : {
+                    "master_invoice_number" : {
+                      "type" : "string",
+                      "description" : "Master Invoice Number\n",
+                      "example" : "005-3324"
+                    },
+                    "master_invoice_date" : {
+                      "type" : "string",
+                      "format" : "date",
+                      "description" : "Master Inovice Date\n",
+                      "example" : "2018-03-15"
+                    }
+                  }
+                } ]
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "Company" : {
+                    "type" : "string",
+                    "deprecated" : true
+                  },
+                  "warehouse" : {
+                    "type" : "integer",
+                    "example" : 30,
+                    "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
+                  },
+                  "ra_number" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string"
+                    },
+                    "example" : "RA123",
+                    "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
+                  },
+                  "delivery_terms" : {
+                    "type" : "string",
+                    "description" : "Delivery terms.\nWill be only used as an additional note\n"
+                  },
+                  "payment_terms" : {
+                    "type" : "string",
+                    "description" : "Payment terms.\nWill be only used as an additional note\n"
+                  },
+                  "currency" : {
+                    "type" : "string",
+                    "description" : "Currency.\nWill be only used as an additional note\n"
+                  },
+                  "total_amount" : {
+                    "type" : "number",
+                    "format" : "double",
+                    "example" : 123.0,
+                    "description" : "Total amount. 2 decimal places.\n"
+                  },
+                  "total_hanging_pieces" : {
+                    "type" : "integer",
+                    "example" : 23,
+                    "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
+                  },
+                  "total_pieces" : {
+                    "type" : "integer",
+                    "example" : 557,
+                    "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
+                  },
+                  "total_boxes" : {
+                    "type" : "integer",
+                    "example" : 10,
+                    "description" : "Number of boxes.\nWill be only used as an additional note\n"
+                  },
+                  "client_code" : {
+                    "type" : "string",
+                    "example" : "12345",
+                    "description" : "Consignee code.\n"
+                  },
+                  "contact_phone" : {
+                    "type" : "string",
+                    "example" : "01-7788-7899",
+                    "description" : "Contact phone.\nWill be only used as an additional note\n"
+                  },
+                  "name" : {
+                    "type" : "string",
+                    "example" : "PAOLO ROSSI",
+                    "description" : "Consignee name.\n"
+                  },
+                  "address" : {
+                    "type" : "string",
+                    "example" : "VIA BIANCHI, 6",
+                    "description" : "Consignee address.\n"
+                  },
+                  "city" : {
+                    "type" : "string",
+                    "example" : "FI",
+                    "description" : "Consignee city.\n"
+                  },
+                  "country" : {
+                    "type" : "string",
+                    "example" : "IT",
+                    "description" : "Consignee country ISO code.\n"
+                  },
+                  "state" : {
+                    "type" : "string",
+                    "example" : "USCA",
+                    "description" : "Consignee state ISO code. Hyphen not supported\n"
+                  },
+                  "zip" : {
+                    "type" : "string",
+                    "example" : "123456",
+                    "description" : "Consignee ZIP\n"
+                  },
+                  "custom_properties" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "description" : "Additional properties\n",
+                      "properties" : {
+                        "name" : {
+                          "type" : "string",
+                          "description" : "Name of the property\n",
+                          "example" : "Property"
+                        },
+                        "value" : {
+                          "type" : "string",
+                          "description" : "Value of the property\n",
+                          "example" : "Value"
+                        }
+                      }
+                    }
+                  },
+                  "receipt_advice_body" : {
+                    "$ref" : "#/components/schemas/ReceiptAdviceBody"
+                  }
+                },
+                "required" : [ "warehouse", "receiving_reference", "receipt_advice_body" ]
+              } ]
+            }
+          }
+        },
+        "required" : [ "receiving_advice_header" ],
+        "example" : {
+          "receiving_advice_header" : {
+            "Company" : "woman",
+            "warehouse" : "FDSNJ",
+            "receiving_reference" : "",
+            "ra_number" : [ "RA123", "abc" ],
+            "master_invoice_date" : "2015-05-14",
+            "master_invoice_number" : 9.0,
+            "delivery_terms" : "",
+            "payment_terms" : "B07",
+            "currency" : "EURO",
+            "total_amount" : "11509.97",
+            "total_hanging_pieces" : "",
+            "total_pieces" : "880",
+            "total_boxes" : "21",
+            "client_code" : "033505",
+            "contact_phone" : 8.331860058E9,
+            "name" : "PAOLO ROSSI",
+            "address" : "VIA BIANCHI,6",
+            "city" : "FI",
+            "country" : "FIRENZE",
+            "state" : "",
+            "zip" : "235689",
+            "custom_properties" : {
+              "custom_property" : [ {
+                "name" : "CustomField1",
+                "value" : "CustomValue1"
+              }, {
+                "name" : "CustomField2",
+                "value" : "CustomValue2"
+              } ]
+            },
+            "receiving_advice_body" : {
+              "boxes" : {
+                "carton" : [ {
+                  "carton_type" : "PP",
+                  "carton_number" : "APC050299",
+                  "total_qty" : "23",
+                  "skus" : {
+                    "sku" : [ {
+                      "model" : "IMBAL.C1",
+                      "style" : "",
+                      "color" : "",
+                      "size" : "UNI",
+                      "barcode_sku" : "123456",
+                      "barcode_ean" : "3000036057013",
+                      "barcode_upc" : "",
+                      "qty" : "1",
+                      "nrf_color" : "",
+                      "nrf_size" : "",
+                      "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
+                      "wholesale_price" : "",
+                      "material_composition" : "",
+                      "pieces" : {
+                        "piece" : [ {
+                          "external_barcode" : "P0300000000001"
+                        }, {
+                          "external_barcode" : "P0300000000005"
+                        } ]
+                      }
+                    } ]
+                  }
+                } ]
+              }
+            }
+          }
+        }
+      },
+      "ReceiptAdviceBody" : {
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/ReceiptAdviceBodyPieces"
+        }, {
+          "$ref" : "#/components/schemas/ReceiptAdviceBodyBoxes"
+        } ]
+      },
+      "ReceiptAdviceBodyBoxes" : {
+        "type" : "object",
+        "properties" : {
+          "boxes" : {
+            "type" : "object",
+            "properties" : {
+              "carton" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Carton"
+                }
+              }
+            },
+            "required" : [ "carton" ]
+          }
+        },
+        "required" : [ "boxes" ]
+      },
+      "Carton" : {
+        "type" : "object",
+        "properties" : {
+          "carton_type" : {
+            "type" : "string",
+            "enum" : [ "PP", "OPEN_STOCK" ],
+            "description" : "Carton type.\n- PP A carton which is going to be shipped \"as is\"\n- OPEN_STOCK A carton which is going to be opened and put on shelves upon receiving\n",
+            "example" : "PP"
+          },
+          "carton_number" : {
+            "type" : "string",
+            "description" : "Carton barcode\n",
+            "example" : "APC050234"
+          },
+          "total_qty" : {
+            "type" : "integer",
+            "description" : "Number of units in carton\n",
+            "example" : 23,
+            "deprecated" : true
+          },
+          "skus" : {
+            "$ref" : "#/components/schemas/Sku"
+          }
+        },
+        "required" : [ "carton_number", "carton_type", "skus" ]
+      },
+      "BarcodeSkuUpcEan" : {
+        "anyOf" : [ {
+          "type" : "object",
+          "properties" : {
+            "barcode_sku" : {
+              "type" : "string",
+              "description" : "SKU\n",
+              "example" : "123456"
+            }
+          },
+          "required" : [ "barcode_sku" ]
+        }, {
+          "type" : "object",
+          "properties" : {
+            "barcode_ean" : {
+              "type" : "integer",
+              "description" : "EAN\n",
+              "example" : "3000036057013"
+            }
+          }
+        }, {
+          "type" : "object",
+          "properties" : {
+            "barcode_upc" : {
+              "type" : "integer",
+              "description" : "UPC\n",
+              "example" : "300003605701"
+            }
+          }
+        } ]
+      },
+      "Sku" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/SkuPieces"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "pieces" : {
+              "$ref" : "#/components/schemas/SkuPiece"
+            }
+          }
+        } ]
+      },
+      "SkuPiece" : {
+        "type" : "object",
+        "properties" : {
+          "piece" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "external_barcode" : {
+                  "type" : "string",
+                  "description" : "Barcode of the piece\n"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SkuPieces" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "model" : {
+              "type" : "string",
+              "description" : "Model\n",
+              "example" : "IMBAL.C1",
+              "deprecated" : true
+            },
+            "style" : {
+              "type" : "string",
+              "description" : "Style\n",
+              "deprecated" : true
+            },
+            "color" : {
+              "type" : "string",
+              "description" : "Color\n",
+              "deprecated" : true
+            },
+            "size" : {
+              "type" : "string",
+              "description" : "Size\n",
+              "example" : "UNI",
+              "deprecated" : true
+            },
+            "nrf_color" : {
+              "type" : "string",
+              "description" : "Color code NRF\n",
+              "deprecated" : true
+            },
+            "nrf_size" : {
+              "type" : "string",
+              "description" : "Size Code NRF\n",
+              "deprecated" : true
+            },
+            "description" : {
+              "type" : "string",
+              "description" : "Article description\n",
+              "example" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
+              "deprecated" : true
+            },
+            "material_composition" : {
+              "type" : "string",
+              "description" : "Material composition\n",
+              "example" : "100% POLYESTER",
+              "deprecated" : true
+            },
+            "wholesale_price" : {
+              "type" : "number",
+              "format" : "double",
+              "description" : "Unit price. 2 decimal places\n",
+              "example" : 300.0,
+              "deprecated" : true
+            },
+            "qty" : {
+              "type" : "integer",
+              "description" : "Quantity for this article\n",
+              "example" : 1
+            },
+            "slot" : {
+              "type" : "string",
+              "description" : "Logical grouping of commodity\n",
+              "example" : "U13",
+              "default" : ""
+            }
+          },
+          "required" : [ "qty", "slot" ]
+        } ]
+      },
+      "ReceiptAdviceBodyPieces" : {
+        "type" : "object",
+        "properties" : {
+          "pieces" : {
+            "type" : "object",
+            "properties" : {
+              "sku" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/SkuPieces"
+                }
+              }
+            },
+            "required" : [ "sku" ]
+          }
+        },
+        "required" : [ "pieces" ]
+      },
+      "InternalServerError" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "statusCode" : {
+            "type" : "integer"
+          }
+        },
+        "required" : [ "message", "statusCode" ]
+      },
+      "CreateReceivingAdviceResponse" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "message" ],
+        "example" : {
+          "message" : "Receipt advice created successfully"
+        }
+      }
+    },
+    "examples" : {
+      "ReceiptAdviceBoxes" : {
+        "value" : {
+          "receiving_advice_header" : {
+            "Company" : "woman",
+            "warehouse" : "FDSNJ",
+            "receiving_reference" : "",
+            "ra_number" : [ "RA123", "abc" ],
+            "master_invoice_date" : "2015-05-14",
+            "master_invoice_number" : 9.0,
+            "delivery_terms" : "",
+            "payment_terms" : "B07",
+            "currency" : "EURO",
+            "total_amount" : "11509.97",
+            "total_hanging_pieces" : "",
+            "total_pieces" : "880",
+            "total_boxes" : "21",
+            "client_code" : "033505",
+            "contact_phone" : 8.331860058E9,
+            "name" : "PAOLO ROSSI",
+            "address" : "VIA BIANCHI,6",
+            "city" : "FI",
+            "country" : "FIRENZE",
+            "state" : "",
+            "zip" : "235689",
+            "custom_properties" : {
+              "custom_property" : [ {
+                "name" : "CustomField1",
+                "value" : "CustomValue1"
+              }, {
+                "name" : "CustomField2",
+                "value" : "CustomValue2"
+              } ]
+            },
+            "receiving_advice_body" : {
+              "pieces" : {
+                "sku" : [ {
+                  "model" : "IMBAL.C1",
+                  "style" : "",
+                  "color" : "",
+                  "size" : "UNI",
+                  "barcode_sku" : "123456",
+                  "barcode_ean" : "3000036057013",
+                  "barcode_upc" : "",
+                  "qty" : "1",
+                  "nrf_color" : "",
+                  "nrf_size" : "",
+                  "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
+                  "wholesale_price" : "",
+                  "material_composition" : "",
+                  "slot" : "A"
+                } ]
+              }
+            }
+          }
+        }
+      },
+      "ReceiptAdvicePieces" : {
+        "value" : {
+          "receiving_advice_header" : {
+            "Company" : "woman",
+            "warehouse" : "FDSNJ",
+            "receiving_reference" : "",
+            "ra_number" : [ "RA123", "abc" ],
+            "master_invoice_date" : "2015-05-14",
+            "master_invoice_number" : 9.0,
+            "delivery_terms" : "",
+            "payment_terms" : "B07",
+            "currency" : "EURO",
+            "total_amount" : "11509.97",
+            "total_hanging_pieces" : "",
+            "total_pieces" : "880",
+            "total_boxes" : "21",
+            "client_code" : "033505",
+            "contact_phone" : 8.331860058E9,
+            "name" : "PAOLO ROSSI",
+            "address" : "VIA BIANCHI,6",
+            "city" : "FI",
+            "country" : "FIRENZE",
+            "state" : "",
+            "zip" : "235689",
+            "custom_properties" : {
+              "custom_property" : [ {
+                "name" : "CustomField1",
+                "value" : "CustomValue1"
+              }, {
+                "name" : "CustomField2",
+                "value" : "CustomValue2"
+              } ]
+            },
+            "receiving_advice_body" : {
+              "boxes" : {
+                "carton" : [ {
+                  "carton_type" : "PP",
+                  "carton_number" : "APC050299",
+                  "total_qty" : "23",
+                  "skus" : {
+                    "sku" : [ {
+                      "model" : "IMBAL.C1",
+                      "style" : "",
+                      "color" : "",
+                      "size" : "UNI",
+                      "barcode_sku" : "123456",
+                      "barcode_ean" : "3000036057013",
+                      "barcode_upc" : "",
+                      "qty" : "1",
+                      "nrf_color" : "",
+                      "nrf_size" : "",
+                      "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
+                      "wholesale_price" : "",
+                      "material_composition" : "",
+                      "pieces" : {
+                        "piece" : [ {
+                          "external_barcode" : "P0300000000001"
+                        }, {
+                          "external_barcode" : "P0300000000005"
+                        } ]
+                      }
+                    } ]
+                  }
+                } ]
+              }
+            }
+          }
+        }
+      },
+      "ServerError" : {
+        "value" : {
+          "message" : "Unexpected error occurred",
+          "statusCode" : 500
+        }
+      },
+      "BadParameter" : {
+        "value" : {
+          "message" : "Bad parameter",
+          "statusCode" : 400
+        }
+      }
+    }
+  }
+}
