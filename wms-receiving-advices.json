@@ -26,12 +26,12 @@
     "description" : "Receiving advice"
   } ],
   "paths" : {
-    "/pickTicketsService/pickTicket" : {
+    "/receivingAdvice" : {
       "put" : {
-        "tags" : [ "WMS", "Pick ticket" ],
+        "tags" : [ "Receiving advice" ],
         "summary" : "Create/Modify a receiving advice in WMS",
         "operationId" : "createOrder",
-        "description" : "API to create or modify an order in WMS\n",
+        "description" : "API to create or modify a receiving advice in WMS\n",
         "parameters" : [ {
           "$ref" : "#/components/parameters/TIMESTAMP_PARAM"
         }, {
