@@ -61,7 +61,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/ReceivingAdvice"
+                "$ref" : "#/components/schemas/Catalogue"
               },
               "examples" : {
                 "ReceiptAdviceBoxes" : {
@@ -74,7 +74,7 @@
             },
             "application/xml" : {
               "schema" : {
-                "$ref" : "#/components/schemas/ReceivingAdvice"
+                "$ref" : "#/components/schemas/Catalogue"
               },
               "examples" : {
                 "ReceiptAdviceBoxes" : {
@@ -151,232 +151,158 @@
       }
     },
     "schemas" : {
-      "OrderTypeEnum" : {
-        "type" : "string",
-        "enum" : [ "B2C", "STD", "BULK", "B2C_CUSTOMER_GIFT", "CIT" ]
-      },
-      "ReceivingAdvice" : {
+      "Catalogue" : {
         "type" : "object",
         "properties" : {
-          "receiving_advice_header" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object",
-              "allOf" : [ {
-                "oneOf" : [ {
-                  "type" : "object",
-                  "properties" : {
-                    "receiving_reference" : {
-                      "type" : "string",
-                      "example" : "abcdef",
-                      "description" : "Unique reference for the receiving advice\n"
-                    }
+          "catalog_header" : {
+            "type" : "object",
+            "allOf" : [ {
+              "oneOf" : [ {
+                "type" : "object",
+                "properties" : {
+                  "receiving_reference" : {
+                    "type" : "string",
+                    "example" : "abcdef",
+                    "description" : "Unique reference for the receiving advice\n"
                   }
-                }, {
-                  "type" : "object",
-                  "properties" : {
-                    "master_invoice_number" : {
-                      "type" : "string",
-                      "description" : "Master Invoice Number\n",
-                      "example" : "005-3324"
-                    },
-                    "master_invoice_date" : {
-                      "type" : "string",
-                      "format" : "date",
-                      "description" : "Master Inovice Date\n",
-                      "example" : "2018-03-15"
-                    }
-                  }
-                } ]
+                }
               }, {
                 "type" : "object",
                 "properties" : {
-                  "Company" : {
+                  "master_invoice_number" : {
                     "type" : "string",
-                    "deprecated" : true
+                    "description" : "Master Invoice Number\n",
+                    "example" : "005-3324"
                   },
-                  "warehouse" : {
-                    "type" : "integer",
-                    "example" : 30,
-                    "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
-                  },
-                  "ra_number" : {
-                    "type" : "array",
-                    "items" : {
-                      "type" : "string"
-                    },
-                    "example" : "RA123",
-                    "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
-                  },
-                  "delivery_terms" : {
+                  "master_invoice_date" : {
                     "type" : "string",
-                    "description" : "Delivery terms.\nWill be only used as an additional note\n"
+                    "format" : "date",
+                    "description" : "Master Inovice Date\n",
+                    "example" : "2018-03-15"
+                  }
+                }
+              } ]
+            }, {
+              "type" : "object",
+              "properties" : {
+                "Company" : {
+                  "type" : "string",
+                  "deprecated" : true
+                },
+                "warehouse" : {
+                  "type" : "integer",
+                  "example" : 30,
+                  "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
+                },
+                "ra_number" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
                   },
-                  "payment_terms" : {
-                    "type" : "string",
-                    "description" : "Payment terms.\nWill be only used as an additional note\n"
-                  },
-                  "currency" : {
-                    "type" : "string",
-                    "description" : "Currency.\nWill be only used as an additional note\n"
-                  },
-                  "total_amount" : {
-                    "type" : "number",
-                    "format" : "double",
-                    "example" : 123.0,
-                    "description" : "Total amount. 2 decimal places.\n"
-                  },
-                  "total_hanging_pieces" : {
-                    "type" : "integer",
-                    "example" : 23,
-                    "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
-                  },
-                  "total_pieces" : {
-                    "type" : "integer",
-                    "example" : 557,
-                    "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
-                  },
-                  "total_boxes" : {
-                    "type" : "integer",
-                    "example" : 10,
-                    "description" : "Number of boxes.\nWill be only used as an additional note\n"
-                  },
-                  "client_code" : {
-                    "type" : "string",
-                    "example" : "12345",
-                    "description" : "Consignee code.\n"
-                  },
-                  "contact_phone" : {
-                    "type" : "string",
-                    "example" : "01-7788-7899",
-                    "description" : "Contact phone.\nWill be only used as an additional note\n"
-                  },
-                  "name" : {
-                    "type" : "string",
-                    "example" : "PAOLO ROSSI",
-                    "description" : "Consignee name.\n"
-                  },
-                  "address" : {
-                    "type" : "string",
-                    "example" : "VIA BIANCHI, 6",
-                    "description" : "Consignee address.\n"
-                  },
-                  "city" : {
-                    "type" : "string",
-                    "example" : "FI",
-                    "description" : "Consignee city.\n"
-                  },
-                  "country" : {
-                    "type" : "string",
-                    "example" : "IT",
-                    "description" : "Consignee country ISO code.\n"
-                  },
-                  "state" : {
-                    "type" : "string",
-                    "example" : "USCA",
-                    "description" : "Consignee state ISO code. Hyphen not supported\n"
-                  },
-                  "zip" : {
-                    "type" : "string",
-                    "example" : "123456",
-                    "description" : "Consignee ZIP\n"
-                  },
-                  "custom_properties" : {
-                    "type" : "array",
-                    "items" : {
-                      "type" : "object",
-                      "description" : "Additional properties\n",
-                      "properties" : {
-                        "name" : {
-                          "type" : "string",
-                          "description" : "Name of the property\n",
-                          "example" : "Property"
-                        },
-                        "value" : {
-                          "type" : "string",
-                          "description" : "Value of the property\n",
-                          "example" : "Value"
-                        }
+                  "example" : "RA123",
+                  "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
+                },
+                "delivery_terms" : {
+                  "type" : "string",
+                  "description" : "Delivery terms.\nWill be only used as an additional note\n"
+                },
+                "payment_terms" : {
+                  "type" : "string",
+                  "description" : "Payment terms.\nWill be only used as an additional note\n"
+                },
+                "currency" : {
+                  "type" : "string",
+                  "description" : "Currency.\nWill be only used as an additional note\n"
+                },
+                "total_amount" : {
+                  "type" : "number",
+                  "format" : "double",
+                  "example" : 123.0,
+                  "description" : "Total amount. 2 decimal places.\n"
+                },
+                "total_hanging_pieces" : {
+                  "type" : "integer",
+                  "example" : 23,
+                  "description" : "Number of loose pieces in hanging racks.\nWill be only used as an additional note\n"
+                },
+                "total_pieces" : {
+                  "type" : "integer",
+                  "example" : 557,
+                  "description" : "Number of loose pieces.\nWill be only used as an additional note\n"
+                },
+                "total_boxes" : {
+                  "type" : "integer",
+                  "example" : 10,
+                  "description" : "Number of boxes.\nWill be only used as an additional note\n"
+                },
+                "client_code" : {
+                  "type" : "string",
+                  "example" : "12345",
+                  "description" : "Consignee code.\n"
+                },
+                "contact_phone" : {
+                  "type" : "string",
+                  "example" : "01-7788-7899",
+                  "description" : "Contact phone.\nWill be only used as an additional note\n"
+                },
+                "name" : {
+                  "type" : "string",
+                  "example" : "PAOLO ROSSI",
+                  "description" : "Consignee name.\n"
+                },
+                "address" : {
+                  "type" : "string",
+                  "example" : "VIA BIANCHI, 6",
+                  "description" : "Consignee address.\n"
+                },
+                "city" : {
+                  "type" : "string",
+                  "example" : "FI",
+                  "description" : "Consignee city.\n"
+                },
+                "country" : {
+                  "type" : "string",
+                  "example" : "IT",
+                  "description" : "Consignee country ISO code.\n"
+                },
+                "state" : {
+                  "type" : "string",
+                  "example" : "USCA",
+                  "description" : "Consignee state ISO code. Hyphen not supported\n"
+                },
+                "zip" : {
+                  "type" : "string",
+                  "example" : "123456",
+                  "description" : "Consignee ZIP\n"
+                },
+                "custom_properties" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "description" : "Additional properties\n",
+                    "properties" : {
+                      "name" : {
+                        "type" : "string",
+                        "description" : "Name of the property\n",
+                        "example" : "Property"
+                      },
+                      "value" : {
+                        "type" : "string",
+                        "description" : "Value of the property\n",
+                        "example" : "Value"
                       }
                     }
-                  },
-                  "receipt_advice_body" : {
-                    "$ref" : "#/components/schemas/ReceiptAdviceBody"
                   }
                 },
-                "required" : [ "warehouse", "receiving_reference", "receipt_advice_body" ]
-              } ]
-            }
+                "receipt_advice_body" : {
+                  "$ref" : "#/components/schemas/ReceiptAdviceBody"
+                }
+              },
+              "required" : [ "warehouse", "receiving_reference", "receipt_advice_body" ]
+            } ]
           }
         },
-        "required" : [ "receiving_advice_header" ],
-        "example" : {
-          "receiving_advice_header" : {
-            "Company" : "woman",
-            "warehouse" : "FDSNJ",
-            "receiving_reference" : "",
-            "ra_number" : [ "RA123", "abc" ],
-            "master_invoice_date" : "2015-05-14",
-            "master_invoice_number" : 9.0,
-            "delivery_terms" : "",
-            "payment_terms" : "B07",
-            "currency" : "EURO",
-            "total_amount" : "11509.97",
-            "total_hanging_pieces" : "",
-            "total_pieces" : "880",
-            "total_boxes" : "21",
-            "client_code" : "033505",
-            "contact_phone" : 8.331860058E9,
-            "name" : "PAOLO ROSSI",
-            "address" : "VIA BIANCHI,6",
-            "city" : "FI",
-            "country" : "FIRENZE",
-            "state" : "",
-            "zip" : "235689",
-            "custom_properties" : {
-              "custom_property" : [ {
-                "name" : "CustomField1",
-                "value" : "CustomValue1"
-              }, {
-                "name" : "CustomField2",
-                "value" : "CustomValue2"
-              } ]
-            },
-            "receiving_advice_body" : {
-              "boxes" : {
-                "carton" : [ {
-                  "carton_type" : "PP",
-                  "carton_number" : "APC050299",
-                  "total_qty" : "23",
-                  "skus" : {
-                    "sku" : [ {
-                      "model" : "IMBAL.C1",
-                      "style" : "",
-                      "color" : "",
-                      "size" : "UNI",
-                      "barcode_sku" : "123456",
-                      "barcode_ean" : "3000036057013",
-                      "barcode_upc" : "",
-                      "qty" : "1",
-                      "nrf_color" : "",
-                      "nrf_size" : "",
-                      "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
-                      "wholesale_price" : "",
-                      "material_composition" : "",
-                      "pieces" : {
-                        "piece" : [ {
-                          "external_barcode" : "P0300000000001"
-                        }, {
-                          "external_barcode" : "P0300000000005"
-                        } ]
-                      }
-                    } ]
-                  }
-                } ]
-              }
-            }
-          }
-        }
+        "required" : [ "catalog_header" ]
       },
       "ReceiptAdviceBody" : {
         "oneOf" : [ {
