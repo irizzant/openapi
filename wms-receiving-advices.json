@@ -125,14 +125,6 @@
         "schema" : {
           "type" : "string"
         }
-      },
-      "orderReferencePrefix" : {
-        "in" : "query",
-        "name" : "orderReferencePrefix",
-        "description" : "Prefix to prepend to the order reference",
-        "schema" : {
-          "type" : "string"
-        }
       }
     },
     "schemas" : {
