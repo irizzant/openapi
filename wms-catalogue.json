@@ -90,7 +90,7 @@
                 },
                 "examples" : {
                   "CatalogServiceResponse" : {
-                    "$ref" : "#/components/schemas/CatalogServiceResponse"
+                    "$ref" : "#/components/examples/CatalogServiceResponse"
                   }
                 }
               }
