@@ -48,27 +48,11 @@
             "application/json" : {
               "schema" : {
                 "$ref" : "#/components/schemas/ReceivingAdvice"
-              },
-              "examples" : {
-                "ReceivingAdviceBoxes" : {
-                  "$ref" : "#/components/examples/ReceivingAdviceBoxes"
-                },
-                "ReceivingAdvicePieces" : {
-                  "$ref" : "#/components/examples/ReceivingAdvicePieces"
-                }
               }
             },
             "application/xml" : {
               "schema" : {
-                "$ref" : "#/components/schemas/PickTicket"
-              },
-              "examples" : {
-                "PickTicketBoxes" : {
-                  "$ref" : "#/components/examples/PickTicketBoxes"
-                },
-                "PickTicketPieces" : {
-                  "$ref" : "#/components/examples/PickTicketPieces"
-                }
+                "$ref" : "#/components/schemas/ReceivingAdvice"
               }
             }
           }
