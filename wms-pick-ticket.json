@@ -551,8 +551,17 @@
             "type" : "array",
             "items" : {
               "type" : "object",
-              "additionalProperties" : {
-                "type" : "string"
+              "properties" : {
+                "name" : {
+                  "type" : "string",
+                  "description" : "Name of the property\n",
+                  "example" : "Property"
+                },
+                "value" : {
+                  "type" : "string",
+                  "description" : "Value of the property\n",
+                  "example" : "Value"
+                }
               }
             }
           },
