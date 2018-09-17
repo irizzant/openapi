@@ -256,7 +256,7 @@
   "components" : {
     "parameters" : {
       "TIMESTAMP_PARAM" : {
-        "in" : "header",
+        "in" : "query",
         "name" : "TIMESTAMP_PARAM",
         "required" : true,
         "description" : "Unix timestamp",
@@ -266,7 +266,7 @@
         }
       },
       "HMAC_PARAM" : {
-        "in" : "header",
+        "in" : "query",
         "name" : "HMAC_PARAM",
         "required" : true,
         "description" : "HMAC MD5 of the query string. This param MUST NOT be included in HMAC calculation. The private key to calculate the HMAC digest will be provided during the integration.\n",
