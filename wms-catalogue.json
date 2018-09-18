@@ -118,7 +118,7 @@
   "components" : {
     "parameters" : {
       "TIMESTAMP_PARAM" : {
-        "in" : "header",
+        "in" : "query",
         "name" : "TIMESTAMP_PARAM",
         "required" : true,
         "description" : "Unix timestamp",
