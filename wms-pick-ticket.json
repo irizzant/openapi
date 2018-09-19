@@ -526,7 +526,8 @@
             },
             "service_level" : {
               "type" : "string",
-              "example" : "STANDARD GROUND"
+              "example" : "STANDARD GROUND",
+              "description" : "The service level to use for shipping.\nWe can translate custom service levels into ours.\n"
             },
             "invoice_amount" : {
               "type" : "number",
