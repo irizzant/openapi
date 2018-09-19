@@ -524,7 +524,7 @@
             "shipping_via" : {
               "type" : "string",
               "example" : "EXECUTIVE GROUP INTERNATIONAL",
-              "description" : "Carrier to use for shipping."
+              "description" : "Carrier to use for shipping.\nWe can translate custom carrier codes into ours.\n"
             },
             "service_level" : {
               "type" : "string",
