@@ -524,6 +524,10 @@
               "type" : "string",
               "example" : "EXECUTIVE GROUP INTERNATIONAL"
             },
+            "service_level" : {
+              "type" : "string",
+              "example" : "STANDARD GROUND"
+            },
             "invoice_amount" : {
               "type" : "number",
               "format" : "double",
