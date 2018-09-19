@@ -552,7 +552,7 @@
             "owner_reference" : {
               "type" : "string",
               "example" : 123456,
-              "description" : "Owner reference\n"
+              "description" : "Additional order reference.\n"
             },
             "channel" : {
               "type" : "string",
