@@ -925,7 +925,6 @@
             "picking_reference" : "150007925",
             "baby_invoice_date" : "2015-05-14",
             "baby_invoice_number" : 9313.0,
-            "service_level" : "STANDARD GROUND",
             "start_ship_date" : "2015-05-14",
             "cancel_date" : "2015-05-20",
             "requested_ship_date" : "2015-05-14",
