@@ -523,7 +523,8 @@
             },
             "shipping_via" : {
               "type" : "string",
-              "example" : "EXECUTIVE GROUP INTERNATIONAL"
+              "example" : "EXECUTIVE GROUP INTERNATIONAL",
+              "description" : "Carrier to be used for shipping."
             },
             "service_level" : {
               "type" : "string",
