@@ -242,7 +242,7 @@
               "allOf" : [ {
                 "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
               }, {
-                "$ref" : "#/components/schemas/SKU_EDI"
+                "$ref" : "#/components/schemas/SKU_Edi"
               } ]
             }
           }
@@ -344,7 +344,7 @@
         },
         "required" : [ "english_description", "commodity_category" ]
       },
-      "SKU_EDI" : {
+      "SKU_Edi" : {
         "type" : "object",
         "allOf" : [ {
           "$ref" : "#/components/schemas/SKU"
