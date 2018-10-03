@@ -222,114 +222,132 @@
         "properties" : {
           "sku" : {
             "type" : "array",
-            "description" : "SKU object\n",
             "items" : {
               "type" : "object",
               "allOf" : [ {
                 "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
               }, {
-                "type" : "object",
-                "properties" : {
-                  "style" : {
-                    "type" : "string",
-                    "example" : "B00009",
-                    "description" : "Style\n"
-                  },
-                  "model" : {
-                    "type" : "string",
-                    "example" : "E001V",
-                    "description" : "Model\n"
-                  },
-                  "color" : {
-                    "type" : "string",
-                    "example" : "200",
-                    "description" : "Color code\n"
-                  },
-                  "color_name" : {
-                    "type" : "string",
-                    "example" : "200",
-                    "description" : "Color description\n"
-                  },
-                  "size" : {
-                    "type" : "string",
-                    "example" : "S",
-                    "description" : "Size code\n"
-                  },
-                  "size_position" : {
-                    "type" : "string",
-                    "example" : "V",
-                    "description" : "Size position\n"
-                  },
-                  "wholesale_price" : {
-                    "type" : "number",
-                    "format" : "double",
-                    "description" : "Unit price. 2 decimal places\n",
-                    "example" : 300.0
-                  },
-                  "retail_price" : {
-                    "type" : "number",
-                    "format" : "double",
-                    "description" : "Retail price. 2 decimal places\n",
-                    "example" : 500.0
-                  },
-                  "description" : {
-                    "type" : "string",
-                    "description" : "Description (in foreign language)\n",
-                    "example" : "PANTALONE CHIARO"
-                  },
-                  "english_description" : {
-                    "type" : "string",
-                    "description" : "Description (in English)\n",
-                    "example" : "WHITE T-SHIRT"
-                  },
-                  "name" : {
-                    "type" : "string",
-                    "description" : "Collection\n",
-                    "example" : "Eel skinny belt"
-                  },
-                  "product_class" : {
-                    "type" : "string",
-                    "description" : "Product class\n",
-                    "example" : "33902"
-                  },
-                  "commodity_group" : {
-                    "type" : "string",
-                    "description" : "Commodity group\n"
-                  },
-                  "commodity_category" : {
-                    "type" : "string",
-                    "description" : "Commodity category.\n- \"O\": Others\n- \"A\": Accessories\n- \"S\": Shoes\n- \"B\": Handbags and Bags\n- \"F\": Flat Garments\n- \"H\": Hanging Garments\n",
-                    "example" : "H"
-                  },
-                  "commodity_sub_category" : {
-                    "type" : "string",
-                    "description" : "Commodity sub category. Will be provided during integration\n",
-                    "example" : "ABC"
-                  },
-                  "material_composition" : {
-                    "type" : "string",
-                    "description" : "Material composition\n",
-                    "example" : "100% POLYESTER"
-                  },
-                  "hs_code" : {
-                    "type" : "string",
-                    "description" : "HTS Code for custom\n"
-                  },
-                  "product_id" : {
-                    "type" : "string",
-                    "description" : "Product code\n",
-                    "example" : "11111111111"
-                  }
-                },
-                "required" : [ "english_description", "commodity_category" ]
+                "$ref" : "#/components/schemas/SKU"
               } ]
             }
           }
         }
       },
       "CatalogueBodyEdi" : {
+        "properties" : {
+          "sku" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
+              }, {
+                "$ref" : "#/components/schemas/SKU_EDI"
+              } ]
+            }
+          }
+        }
+      },
+      "SKU" : {
+        "type" : "object",
+        "properties" : {
+          "style" : {
+            "type" : "string",
+            "example" : "B00009",
+            "description" : "Style\n"
+          },
+          "model" : {
+            "type" : "string",
+            "example" : "E001V",
+            "description" : "Model\n"
+          },
+          "color" : {
+            "type" : "string",
+            "example" : "200",
+            "description" : "Color code\n"
+          },
+          "color_name" : {
+            "type" : "string",
+            "example" : "200",
+            "description" : "Color description\n"
+          },
+          "size" : {
+            "type" : "string",
+            "example" : "S",
+            "description" : "Size code\n"
+          },
+          "size_position" : {
+            "type" : "string",
+            "example" : "V",
+            "description" : "Size position\n"
+          },
+          "wholesale_price" : {
+            "type" : "number",
+            "format" : "double",
+            "description" : "Unit price. 2 decimal places\n",
+            "example" : 300.0
+          },
+          "retail_price" : {
+            "type" : "number",
+            "format" : "double",
+            "description" : "Retail price. 2 decimal places\n",
+            "example" : 500.0
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description (in foreign language)\n",
+            "example" : "PANTALONE CHIARO"
+          },
+          "english_description" : {
+            "type" : "string",
+            "description" : "Description (in English)\n",
+            "example" : "WHITE T-SHIRT"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Collection\n",
+            "example" : "Eel skinny belt"
+          },
+          "product_class" : {
+            "type" : "string",
+            "description" : "Product class\n",
+            "example" : "33902"
+          },
+          "commodity_group" : {
+            "type" : "string",
+            "description" : "Commodity group\n"
+          },
+          "commodity_category" : {
+            "type" : "string",
+            "description" : "Commodity category.\n- \"O\": Others\n- \"A\": Accessories\n- \"S\": Shoes\n- \"B\": Handbags and Bags\n- \"F\": Flat Garments\n- \"H\": Hanging Garments\n",
+            "example" : "H"
+          },
+          "commodity_sub_category" : {
+            "type" : "string",
+            "description" : "Commodity sub category. Will be provided during integration\n",
+            "example" : "ABC"
+          },
+          "material_composition" : {
+            "type" : "string",
+            "description" : "Material composition\n",
+            "example" : "100% POLYESTER"
+          },
+          "hs_code" : {
+            "type" : "string",
+            "description" : "HTS Code for custom\n"
+          },
+          "product_id" : {
+            "type" : "string",
+            "description" : "Product code\n",
+            "example" : "11111111111"
+          }
+        },
+        "required" : [ "english_description", "commodity_category" ]
+      },
+      "SKU_EDI" : {
+        "type" : "object",
         "allOf" : [ {
-          "$ref" : "#/components/schemas/CatalogueBody"
+          "$ref" : "#/components/schemas/SKU"
         }, {
           "type" : "object",
           "properties" : {
