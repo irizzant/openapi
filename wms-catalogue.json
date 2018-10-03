@@ -231,7 +231,8 @@
               } ]
             }
           }
-        }
+        },
+        "required" : [ "sku" ]
       },
       "CatalogueBodyEdi" : {
         "properties" : {
@@ -246,7 +247,8 @@
               } ]
             }
           }
-        }
+        },
+        "required" : [ "sku" ]
       },
       "SKU" : {
         "type" : "object",
