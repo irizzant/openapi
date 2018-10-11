@@ -566,23 +566,30 @@
               "description" : "Code to identify the available operations on the created order.\nWill be provided during the integration.\n- \"\" (Empty value) there is no restriction\n- \"N\" Locked Order/Booking (OK Booking/NO Picking/NO Shipping)\n- \"B\" Paused Order (OK Booking/OK Picking/NO Shipping)\n"
             },
             "custom_properties" : {
-              "type" : "array",
-              "items" : {
-                "type" : "object",
-                "description" : "Additional properties\n",
-                "properties" : {
-                  "name" : {
-                    "type" : "string",
-                    "description" : "Name of the property\n",
-                    "example" : "Property"
-                  },
-                  "value" : {
-                    "type" : "string",
-                    "description" : "Value of the property\n",
-                    "example" : "Value"
+              "type" : "object",
+              "description" : "Additional properties\n",
+              "properties" : {
+                "custom_property" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "description" : "Additional property\n",
+                    "properties" : {
+                      "name" : {
+                        "type" : "string",
+                        "description" : "Name of the property\n",
+                        "example" : "Property"
+                      },
+                      "value" : {
+                        "type" : "string",
+                        "description" : "Value of the property\n",
+                        "example" : "Value"
+                      }
+                    }
                   }
                 }
-              }
+              },
+              "required" : [ "custom_property" ]
             },
             "ship_to" : {
               "$ref" : "#/components/schemas/Actor"
