@@ -257,23 +257,30 @@
                   "description" : "Consignee ZIP\n"
                 },
                 "custom_properties" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "object",
-                    "description" : "Additional properties\n",
-                    "properties" : {
-                      "name" : {
-                        "type" : "string",
-                        "description" : "Name of the property\n",
-                        "example" : "Property"
-                      },
-                      "value" : {
-                        "type" : "string",
-                        "description" : "Value of the property\n",
-                        "example" : "Value"
+                  "type" : "object",
+                  "description" : "Additional properties\n",
+                  "properties" : {
+                    "custom_property" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "description" : "Additional property\n",
+                        "properties" : {
+                          "name" : {
+                            "type" : "string",
+                            "description" : "Name of the property\n",
+                            "example" : "Property"
+                          },
+                          "value" : {
+                            "type" : "string",
+                            "description" : "Value of the property\n",
+                            "example" : "Value"
+                          }
+                        }
                       }
                     }
-                  }
+                  },
+                  "required" : [ "custom_property" ]
                 },
                 "receipt_advice_body" : {
                   "$ref" : "#/components/schemas/ReceiptAdviceBody"
