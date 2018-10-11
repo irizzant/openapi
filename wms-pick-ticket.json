@@ -517,7 +517,7 @@
               "description" : "Number of boxes.\nWill be only used as an additional note\n"
             },
             "priority" : {
-              "type" : "integer",
+              "type" : "string",
               "example" : "A",
               "description" : "Order priority"
             },
