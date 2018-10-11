@@ -118,7 +118,7 @@
         }
       },
       "HMAC_PARAM" : {
-        "in" : "header",
+        "in" : "query",
         "name" : "HMAC_PARAM",
         "required" : true,
         "description" : "HMAC MD5 of the query string.\nThis param MUST NOT be included in HMAC calculation\n",
