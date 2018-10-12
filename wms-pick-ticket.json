@@ -909,6 +909,9 @@
           },
           "statusCode" : {
             "type" : "integer"
+          },
+          "errorDetails" : {
+            "type" : "string"
           }
         },
         "required" : [ "message", "statusCode" ]
