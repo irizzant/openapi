@@ -625,14 +625,15 @@
                   "carton_type" : "PP",
                   "carton_number" : "APC050299",
                   "total_qty" : "23",
-                  "custom_properties" : null,
-                  "custom_property" : [ {
-                    "name" : "CustomField1",
-                    "value" : "CustomValue1"
-                  }, {
-                    "name" : "CustomField2",
-                    "value" : "CustomValue2"
-                  } ],
+                  "custom_properties" : {
+                    "custom_property" : [ {
+                      "name" : "CustomField1",
+                      "value" : "CustomValue1"
+                    }, {
+                      "name" : "CustomField2",
+                      "value" : "CustomValue2"
+                    } ]
+                  },
                   "skus" : {
                     "sku" : [ {
                       "model" : "IMBAL.C1",
