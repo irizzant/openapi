@@ -257,30 +257,7 @@
                   "description" : "Consignee ZIP\n"
                 },
                 "custom_properties" : {
-                  "type" : "object",
-                  "description" : "Additional properties\n",
-                  "properties" : {
-                    "custom_property" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "object",
-                        "description" : "Additional property\n",
-                        "properties" : {
-                          "name" : {
-                            "type" : "string",
-                            "description" : "Name of the property\n",
-                            "example" : "Property"
-                          },
-                          "value" : {
-                            "type" : "string",
-                            "description" : "Value of the property\n",
-                            "example" : "Value"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "required" : [ "custom_property" ]
+                  "$ref" : "#/components/schemas/CustomProperties"
                 },
                 "receipt_advice_body" : {
                   "$ref" : "#/components/schemas/ReceiptAdviceBody"
@@ -291,71 +268,9 @@
           }
         },
         "required" : [ "receiving_advice_header" ],
-        "example" : {
-          "receiving_advice_header" : {
-            "Company" : "woman",
-            "warehouse" : "FDSNJ",
-            "receiving_reference" : "",
-            "ra_number" : [ "RA123", "abc" ],
-            "master_invoice_date" : "2015-05-14",
-            "master_invoice_number" : 9.0,
-            "delivery_terms" : "",
-            "payment_terms" : "B07",
-            "currency" : "EURO",
-            "total_amount" : "11509.97",
-            "total_hanging_pieces" : "",
-            "total_pieces" : "880",
-            "total_boxes" : "21",
-            "client_code" : "033505",
-            "contact_phone" : 8.331860058E9,
-            "name" : "PAOLO ROSSI",
-            "address" : "VIA BIANCHI,6",
-            "city" : "FI",
-            "country" : "FIRENZE",
-            "state" : "",
-            "zip" : "235689",
-            "custom_properties" : {
-              "custom_property" : [ {
-                "name" : "CustomField1",
-                "value" : "CustomValue1"
-              }, {
-                "name" : "CustomField2",
-                "value" : "CustomValue2"
-              } ]
-            },
-            "receiving_advice_body" : {
-              "boxes" : {
-                "carton" : [ {
-                  "carton_type" : "PP",
-                  "carton_number" : "APC050299",
-                  "total_qty" : "23",
-                  "skus" : {
-                    "sku" : [ {
-                      "model" : "IMBAL.C1",
-                      "style" : "",
-                      "color" : "",
-                      "size" : "UNI",
-                      "barcode_sku" : "123456",
-                      "barcode_ean" : "3000036057013",
-                      "barcode_upc" : "",
-                      "qty" : "1",
-                      "nrf_color" : "",
-                      "nrf_size" : "",
-                      "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
-                      "wholesale_price" : "",
-                      "material_composition" : "",
-                      "pieces" : {
-                        "piece" : [ {
-                          "external_barcode" : "P0300000000001"
-                        }, {
-                          "external_barcode" : "P0300000000005"
-                        } ]
-                      }
-                    } ]
-                  }
-                } ]
-              }
-            }
+        "examples" : {
+          "receiptAdviceBodyBoxes" : {
+            "$ref" : "#/components/examples/ReceiptAdviceBodyBoxes"
           }
         }
       },
@@ -403,6 +318,9 @@
             "description" : "Number of units in carton\n",
             "example" : 23,
             "deprecated" : true
+          },
+          "custom_properties" : {
+            "$ref" : "#/components/schemas/CustomProperties"
           },
           "skus" : {
             "$ref" : "#/components/schemas/Sku"
@@ -560,6 +478,32 @@
         },
         "required" : [ "pieces" ]
       },
+      "CustomProperties" : {
+        "type" : "object",
+        "description" : "Additional properties\n",
+        "properties" : {
+          "custom_property" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "description" : "Additional property\n",
+              "properties" : {
+                "name" : {
+                  "type" : "string",
+                  "description" : "Name of the property\n",
+                  "example" : "Property"
+                },
+                "value" : {
+                  "type" : "string",
+                  "description" : "Value of the property\n",
+                  "example" : "Value"
+                }
+              }
+            }
+          }
+        },
+        "required" : [ "custom_property" ]
+      },
       "InternalServerError" : {
         "type" : "object",
         "properties" : {
@@ -586,7 +530,7 @@
       }
     },
     "examples" : {
-      "ReceiptAdviceBoxes" : {
+      "ReceiptAdvicePieces" : {
         "value" : {
           "receiving_advice_header" : {
             "Company" : "woman",
@@ -642,7 +586,7 @@
           }
         }
       },
-      "ReceiptAdvicePieces" : {
+      "ReceiptAdviceBoxes" : {
         "value" : {
           "receiving_advice_header" : {
             "Company" : "woman",
@@ -681,6 +625,14 @@
                   "carton_type" : "PP",
                   "carton_number" : "APC050299",
                   "total_qty" : "23",
+                  "custom_properties" : null,
+                  "custom_property" : [ {
+                    "name" : "CustomField1",
+                    "value" : "CustomValue1"
+                  }, {
+                    "name" : "CustomField2",
+                    "value" : "CustomValue2"
+                  } ],
                   "skus" : {
                     "sku" : [ {
                       "model" : "IMBAL.C1",
