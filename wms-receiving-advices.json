@@ -268,9 +268,9 @@
           }
         },
         "required" : [ "receiving_advice_header" ],
-        "examples" : {
-          "receiptAdviceBodyBoxes" : {
-            "$ref" : "#/components/examples/ReceiptAdviceBodyBoxes"
+        "example" : {
+          "receiptAdviceBoxes" : {
+            "$ref" : "#/components/examples/ReceiptAdviceBoxes"
           }
         }
       },
