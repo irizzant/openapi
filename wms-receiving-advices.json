@@ -455,6 +455,30 @@
               "description" : "Logical grouping of commodity\n",
               "example" : "U13",
               "default" : ""
+            },
+            "order_line" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "primary_reference" : {
+                    "type" : "string",
+                    "description" : "Primary reference\n",
+                    "example" : "abc"
+                  },
+                  "secondary_reference" : {
+                    "type" : "string",
+                    "description" : "Secondary reference\n",
+                    "example" : "123"
+                  },
+                  "quantity" : {
+                    "type" : "integer",
+                    "description" : "Quantity\n",
+                    "example" : 3
+                  }
+                },
+                "required" : [ "primary_reference", "quantity" ]
+              }
             }
           },
           "required" : [ "qty", "slot" ]
@@ -649,6 +673,11 @@
                       "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
                       "wholesale_price" : "",
                       "material_composition" : "",
+                      "order_line" : [ {
+                        "primary_reference" : "abc",
+                        "secondary_reference" : "456",
+                        "quantity" : "3"
+                      } ],
                       "pieces" : {
                         "piece" : [ {
                           "external_barcode" : "P0300000000001"
