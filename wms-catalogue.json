@@ -434,44 +434,42 @@
     },
     "examples" : {
       "Catalogue" : {
-        "value" : {
-          "catalog_header" : {
-            "company" : "PRS",
-            "year" : "2014",
-            "season" : "WS14 D5",
-            "total" : "1"
-          },
-          "catalog_body" : {
-            "sku" : [ {
-              "style" : "B00009",
-              "model" : "E001V",
-              "color" : "0000",
-              "color_name" : "Black",
-              "size" : "S",
-              "size_position" : "",
-              "barcode_sku" : "1111111111142",
-              "barcode_upc" : "222222222222",
-              "barcode_ean" : "3333333333333",
-              "wholesale_price" : "210.00",
-              "retail_price" : "480.00",
-              "description" : "",
-              "english_description" : "",
-              "name" : "Eel skinny belt",
-              "nrf_color" : "001",
-              "nrf_size" : "33902",
-              "product_class" : "33902",
-              "commodity_group" : "",
-              "commodity_category" : "H",
-              "commodity_sub_category" : "ABC",
-              "material_composition" : "",
-              "hanging_flat_unit" : "",
-              "hs_code" : "",
-              "product_id" : "11111111111",
-              "catalog_provider" : "I",
-              "selection_code" : "100",
-              "selection_code_description" : "FEMALE"
-            } ]
-          }
+        "catalog_header" : {
+          "company" : "PRS",
+          "year" : "2014",
+          "season" : "WS14 D5",
+          "total" : "1"
+        },
+        "catalog_body" : {
+          "sku" : [ {
+            "style" : "B00009",
+            "model" : "E001V",
+            "color" : "0000",
+            "color_name" : "Black",
+            "size" : "S",
+            "size_position" : "",
+            "barcode_sku" : "1111111111142",
+            "barcode_upc" : "222222222222",
+            "barcode_ean" : "3333333333333",
+            "wholesale_price" : "210.00",
+            "retail_price" : "480.00",
+            "description" : "",
+            "english_description" : "",
+            "name" : "Eel skinny belt",
+            "nrf_color" : "001",
+            "nrf_size" : "33902",
+            "product_class" : "33902",
+            "commodity_group" : "",
+            "commodity_category" : "H",
+            "commodity_sub_category" : "ABC",
+            "material_composition" : "",
+            "hanging_flat_unit" : "",
+            "hs_code" : "",
+            "product_id" : "11111111111",
+            "catalog_provider" : "I",
+            "selection_code" : "100",
+            "selection_code_description" : "FEMALE"
+          } ]
         }
       },
       "CatalogServiceResponse" : {
