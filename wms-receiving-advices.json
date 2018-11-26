@@ -304,8 +304,8 @@
         "properties" : {
           "carton_type" : {
             "type" : "string",
-            "enum" : [ "PP", "OPEN_STOCK" ],
-            "description" : "Carton type.\n- PP A carton which is going to be shipped \"as is\"\n- OPEN_STOCK A carton which is going to be opened and put on shelves upon receiving\n",
+            "enum" : [ "PP", "OPEN STOCK" ],
+            "description" : "Carton type.\n- PP A carton which is going to be shipped \"as is\"\n- OPEN STOCK A carton which is going to be opened and put on shelves upon receiving\n",
             "example" : "PP"
           },
           "carton_number" : {
