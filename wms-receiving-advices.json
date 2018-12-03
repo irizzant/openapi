@@ -455,30 +455,6 @@
               "description" : "Logical grouping of commodity\n",
               "example" : "U13",
               "default" : ""
-            },
-            "order_line" : {
-              "type" : "array",
-              "items" : {
-                "type" : "object",
-                "properties" : {
-                  "primary_reference" : {
-                    "type" : "string",
-                    "description" : "Primary reference\n",
-                    "example" : "abc"
-                  },
-                  "secondary_reference" : {
-                    "type" : "string",
-                    "description" : "Secondary reference\n",
-                    "example" : "123"
-                  },
-                  "quantity" : {
-                    "type" : "integer",
-                    "description" : "Quantity\n",
-                    "example" : 3
-                  }
-                },
-                "required" : [ "primary_reference", "quantity" ]
-              }
             }
           },
           "required" : [ "qty", "slot" ]
