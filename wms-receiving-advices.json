@@ -183,6 +183,10 @@
                   "example" : "RA123",
                   "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
                 },
+                "notes" : {
+                  "type" : "string",
+                  "description" : "Notes\n"
+                },
                 "delivery_terms" : {
                   "type" : "string",
                   "description" : "Delivery terms.\nWill be only used as an additional note\n"
