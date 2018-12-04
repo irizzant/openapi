@@ -583,7 +583,12 @@
                   "description" : "TRANSPORT COSTS-IMB.C1 MIS.600X400X400",
                   "wholesale_price" : "",
                   "material_composition" : "",
-                  "slot" : "A"
+                  "slot" : "A",
+                  "order_line" : [ {
+                    "primary_reference" : "abc",
+                    "secondary_reference" : "456",
+                    "quantity" : "3"
+                  } ]
                 } ]
               }
             }
