@@ -715,6 +715,10 @@
               "description" : "Material composition\n",
               "example" : "100% POLYESTER"
             },
+            "handling_unit" : {
+              "type" : "string",
+              "description" : "Describes the packaging type to use for packaging.\nMust be a costant value provided during the integration.\n"
+            },
             "order_line" : {
               "type" : "array",
               "items" : {
