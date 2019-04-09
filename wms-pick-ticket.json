@@ -221,7 +221,7 @@
             "content" : {
               "text/plain" : {
                 "schema" : {
-                  "type" : "string"
+                  "enum" : [ "Waiting", "Partially Picked", "Picked", "Ready To Ship", "Partially Shipped", "Shipped", "Shipping Cancel", "Allocated", "Partially Allocated", "Staged", "Partially Staged", "Delivered" ]
                 },
                 "example" : "Shipped"
               }
