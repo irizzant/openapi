@@ -462,6 +462,8 @@
             }
           },
           "required" : [ "qty", "slot" ]
+        }, {
+          "$ref" : "#/components/schemas/SkuPiece"
         } ]
       },
       "ReceiptAdviceBodyPieces" : {
