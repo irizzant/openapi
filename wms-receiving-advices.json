@@ -377,6 +377,7 @@
       },
       "SkuPiece" : {
         "type" : "object",
+        "description" : "Provides the pieces barcodes\n",
         "properties" : {
           "piece" : {
             "type" : "array",
