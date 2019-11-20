@@ -176,10 +176,7 @@
                   "description" : "Code to identify the warehouse internally.\nWill be provided with the integration\n"
                 },
                 "ra_number" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "string"
-                  },
+                  "type" : "string",
                   "example" : "RA123",
                   "description" : "Return Authorization Number.\nFor the returns flow, MUST be provided to identify\nthat this receipt advice is a return.\n"
                 },
@@ -604,7 +601,7 @@
             "Company" : "woman",
             "warehouse" : "FDSNJ",
             "receiving_reference" : "",
-            "ra_number" : [ "RA123", "abc" ],
+            "ra_number" : "RA123",
             "master_invoice_date" : "2015-05-14",
             "master_invoice_number" : 9.0,
             "delivery_terms" : "",
