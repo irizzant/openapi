@@ -472,7 +472,8 @@
               "selection_code_description" : "FEMALE"
             } ]
           }
-        }
+        },
+        "summary" : "Catalogue Sample"
       },
       "CatalogServiceResponse" : {
         "value" : {
