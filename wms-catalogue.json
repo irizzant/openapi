@@ -287,7 +287,7 @@
           },
           "commodity_category" : {
             "type" : "string",
-            "description" : "Commodity category.\n- \"O\": Others\n- \"A\": Accessories\n- \"S\": Shoes\n- \"B\": Handbags and Bags\n- \"F\": Flat Garments\n- \"H\": Hanging Garments\n",
+            "description" : "Commodity category.\n- \"O\": Others\n- \"A\": Accessories\n- \"S\": Shoes\n- \"B\": Handbags and Bags\n- \"F\": Flat Garments\n- \"H\": Hanging Garments\n- \"P\": Packaging Materials\n- \"V\": Advertising Materials\n",
             "example" : "H"
           },
           "commodity_sub_category" : {
