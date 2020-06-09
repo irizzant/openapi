@@ -394,6 +394,8 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BarcodeSkuUpcEan"
         }, {
+          "$ref" : "#/components/schemas/CustomProperties"
+        }, {
           "type" : "object",
           "properties" : {
             "model" : {
