@@ -184,6 +184,10 @@
                   "type" : "string",
                   "description" : "Notes\n"
                 },
+                "expected_arrival_date" : {
+                  "type" : "string",
+                  "description" : "Expected date of arrival.\n"
+                },
                 "delivery_terms" : {
                   "type" : "string",
                   "description" : "Delivery terms.\nWill be only used as an additional note\n"
@@ -545,6 +549,7 @@
             "ra_number" : [ "RA123", "abc" ],
             "master_invoice_date" : "2015-05-14",
             "master_invoice_number" : 9.0,
+            "expected_arrival_date" : "2015-05-14",
             "delivery_terms" : "",
             "payment_terms" : "B07",
             "currency" : "EURO",
@@ -606,6 +611,7 @@
             "ra_number" : "RA123",
             "master_invoice_date" : "2015-05-14",
             "master_invoice_number" : 9.0,
+            "expected_arrival_date" : "2015-05-14",
             "delivery_terms" : "",
             "payment_terms" : "B07",
             "currency" : "EURO",
