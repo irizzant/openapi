@@ -261,6 +261,11 @@
                   "example" : "123456",
                   "description" : "Consignee ZIP\n"
                 },
+                "return_tracking_number" : {
+                  "type" : "string",
+                  "example" : "1Z1234F",
+                  "description" : "Return tracking number\n"
+                },
                 "custom_properties" : {
                   "$ref" : "#/components/schemas/CustomProperties"
                 },
